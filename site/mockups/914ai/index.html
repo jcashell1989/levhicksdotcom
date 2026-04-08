@@ -915,8 +915,28 @@
     text-align: center; font-size: 0.9rem; font-style: italic;
     color: #5A5347; opacity: 0.85;
   }
+  /* ---- Responsive ---- */
+
+  /* Tablet: stack mockup grids, reduce padding, fix snap */
   @media (max-width: 800px) {
-    .practical-grid, .cta-grid, .cta-future-list { grid-template-columns: 1fr; }
+    html {
+      scroll-snap-type: y proximity; /* prevent mandatory snap trapping tall stacked sections */
+    }
+    section {
+      min-height: auto;       /* don't force 100vh — content dictates height */
+      padding: 3rem 1.5rem;
+    }
+    .mockup-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .practical-grid, .cta-grid, .cta-future-list {
+      grid-template-columns: 1fr;
+    }
+    /* Fluid max-width cards */
+    .voice-mock, .memory-card, .trip-card {
+      max-width: 100%;
+    }
   }
 
   /* ---- Closing ---- */
@@ -943,20 +963,50 @@
     margin-top: 3rem; font-size: 0.95rem; font-style: italic; opacity: 0.75;
   }
 
-  /* ---- Responsive ---- */
-  @media (max-width: 800px) {
-    .mockup-grid { grid-template-columns: 1fr; gap: 2rem; }
-  }
+  /* Phone: typography, frame sizing, spacing */
   @media (max-width: 700px) {
-    section { padding: 3rem 1.5rem; }
-    .hero h1 { font-size: 2.4rem; }
-    h2 { font-size: 1.8rem !important; }
-    .solution .big-idea { font-size: 1.3rem; }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem; /* was 3rem — excessive on mobile */
+    }
+    h2 {
+      font-size: 1.8rem;     /* no !important — allow specificity-based exceptions */
+    }
+    .closing h2 {
+      font-size: 2rem;       /* intentional exception — wins via specificity */
+    }
+    .solution .big-idea { font-size: 1.25rem; }
     .catch-grid { grid-template-columns: 1fr; }
     .privacy-cards, .future-cards { grid-template-columns: 1fr; }
-    .closing h2 { font-size: 2rem; }
-    .tablet-frame { max-width: 100%; }
+    /* Tablet frame: fluid, drop aspect-ratio so pending cards don't clip */
+    .tablet-frame {
+      max-width: 100%;
+      aspect-ratio: auto;    /* was 4/3 — let content height be natural */
+      min-height: 280px;
+    }
     .tablet-idle .clock .time { font-size: 3rem; }
+    /* Phone frame: fluid, capped at original 280px */
+    .phone-frame {
+      width: 100%;
+      max-width: 280px;      /* was width: 280px fixed — now fluid */
+    }
+    /* Trip card text: tighten on narrow screens */
+    .trip-card .trip-meta { font-size: 0.72rem; }
+    .trip-card .trip-primary { font-size: 0.88rem; }
+  }
+
+  /* Extra small: 380px and below */
+  @media (max-width: 380px) {
+    section { padding: 2.5rem 1.25rem; }
+    .hero h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.6rem; }
+    .catch-item { font-size: 1rem; }
+    .pending-card { padding: 0.7rem 0.8rem; }
+    .pending-card .pc-icon { width: 32px; height: 32px; }
   }
 
   /* ---- Print ---- */
