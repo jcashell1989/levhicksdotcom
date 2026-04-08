@@ -158,56 +158,38 @@
   }
 
   /* ---- Tablet mockup ---- */
-  .tablet-frame {
-    background: #1D1912;
-    border-radius: 36px;
-    padding: 18px;
-    box-shadow: 0 30px 80px rgba(201, 165, 78, 0.25), 0 12px 32px rgba(29, 25, 18, 0.25);
-    width: 100%;
-    max-width: 540px;
-    margin: 0 auto;
-    position: relative;
-    aspect-ratio: 4 / 3;
-  }
-  .tablet-frame::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 4px;
-    width: 3px;
-    height: 40px;
-    background: #4F473B;
-    border-radius: 2px;
-    transform: translateY(-50%);
-  }
-  .tablet-screen {
-    background: #1D1912;
-    border-radius: 22px;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Idle wallpaper state */
+  /* Idle wallpaper state — bezel is border on the content itself, no wrapper needed */
   .tablet-idle {
     background:
       radial-gradient(ellipse 95% 70% at 22% 28%, rgba(126, 172, 124, 0.55) 0%, transparent 60%),
       radial-gradient(ellipse 95% 70% at 78% 78%, rgba(224, 195, 107, 0.65) 0%, transparent 60%),
       #F5F0E8;
     width: 100%;
-    flex: 1;
-    min-height: 0;
+    max-width: 540px;
+    margin: 0 auto;
     color: #2B241B;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.6rem 1.8rem;
+    padding: 2.5rem 2rem;
     position: relative;
-    overflow: hidden;
+    /* Bezel */
+    border: 18px solid #1D1912;
+    border-radius: 36px;
+    box-shadow: 0 30px 80px rgba(201, 165, 78, 0.25), 0 12px 32px rgba(29, 25, 18, 0.25);
+    /* Side button */
+    outline: 3px solid #1D1912;
+  }
+  .tablet-idle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -21px;
+    width: 3px;
+    height: 40px;
+    background: #4F473B;
+    border-radius: 2px;
+    transform: translateY(-50%);
   }
   .tablet-idle .clock .time { color: #2B241B; text-shadow: 0 2px 20px rgba(245, 240, 232, 0.4); }
   .tablet-idle .clock .date { color: #4F473B; }
@@ -996,15 +978,6 @@
     .solution .big-idea { font-size: 1.25rem; }
     .catch-grid { grid-template-columns: 1fr; }
     .privacy-cards, .future-cards { grid-template-columns: 1fr; }
-    /* Tablet frame: fluid, taller ratio on mobile so content fits without overflow */
-    .tablet-frame {
-      max-width: 100%;
-      aspect-ratio: 3 / 2;
-    }
-    /* Screen must fill the frame height */
-    .tablet-screen {
-      height: 100%;
-    }
     .tablet-idle .clock .time { font-size: 2.5rem; }
     .tablet-idle .clock .date { font-size: 0.9rem; }
     .tablet-idle .footer-line { font-size: 0.75rem; }
@@ -1085,16 +1058,12 @@
           new to learn.
         </p>
       </div>
-      <div class="tablet-frame">
-        <div class="tablet-screen">
-          <div class="tablet-idle">
-            <div class="clock">
-              <div class="time">10:42</div>
-              <div class="date">Tuesday, April 7</div>
-            </div>
-            <div class="footer-line">Nothing to review &middot; <strong>Next:</strong> Capri trip in 5 days</div>
-          </div>
+      <div class="tablet-idle">
+        <div class="clock">
+          <div class="time">10:42</div>
+          <div class="date">Tuesday, April 7</div>
         </div>
+        <div class="footer-line">Nothing to review &middot; <strong>Next:</strong> Capri trip in 5 days</div>
       </div>
     </div>
   </div>
