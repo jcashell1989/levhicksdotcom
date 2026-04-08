@@ -6,56 +6,13 @@
   <title>Why this site exists — Julian Hicks</title>
   <meta name="description" content="A short note on what this corner of the internet is for, and what it isn't.">
   <meta name="robots" content="index, follow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    :root {
-      --bg:      #F5F0E8;
-      --fg:      #2B241B;
-      --muted:   #5A5347;
-      --green:   #3D6B3E;
-      --gold:    #7A6020;
-      --gold-hi: #B8922E;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* Post pages read top-aligned and slightly larger than the rest of the site */
     body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Atkinson Hyperlegible Next', sans-serif;
+      align-items: flex-start;
       font-size: 1.0625rem;
       line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 4rem 2rem 8rem;
-    }
-
-    main { max-width: 640px; width: 100%; }
-
-    .back-link {
-      display: inline-block;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      margin-bottom: 2rem;
-      background-image: linear-gradient(var(--muted), var(--muted));
-      background-size: 0% 1px;
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      transition: background-size 0.2s ease;
-    }
-
-    .back-link:hover,
-    .back-link:focus-visible { background-size: 100% 1px; outline: none; }
-
-    .back-link:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 3px;
-      border-radius: 1px;
     }
 
     header.post-header { margin-bottom: 2.5rem; }
@@ -67,19 +24,12 @@
       margin-bottom: 0.4rem;
     }
 
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+    header.post-header h1 {
       line-height: 1.15;
       margin-bottom: 1rem;
     }
 
-    .rule {
-      width: 2rem;
-      height: 2px;
-      background: var(--green);
-    }
+    header.post-header .rule { margin-bottom: 0; }
 
     article.prose h2 {
       font-size: 1.375rem;
@@ -100,9 +50,7 @@
     article.prose p { margin-bottom: 1.1rem; }
 
     article.prose ul,
-    article.prose ol {
-      margin: 0 0 1.25rem 1.25rem;
-    }
+    article.prose ol { margin: 0 0 1.25rem 1.25rem; }
 
     article.prose li { margin-bottom: 0.4rem; }
 
@@ -152,7 +100,6 @@
     }
 
     article.prose pre code { background: none; padding: 0; }
-
     article.prose strong { font-weight: 700; }
     article.prose em { font-style: italic; }
 

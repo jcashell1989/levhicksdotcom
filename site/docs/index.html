@@ -6,83 +6,9 @@
   <title>Docs — Julian Hicks</title>
   <meta name="description" content="Document lookup.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    :root {
-      --bg:      #F5F0E8;
-      --fg:      #2B241B;
-      --muted:   #5A5347;
-      --green:   #3D6B3E;
-      --gold:    #7A6020;
-      --gold-hi: #B8922E;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Atkinson Hyperlegible Next', sans-serif;
-      font-size: 1rem;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem 8rem;
-    }
-
-    main {
-      max-width: 420px;
-      width: 100%;
-    }
-
-    .back {
-      display: inline-block;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      margin-bottom: 2rem;
-    }
-
-    .back:hover,
-    .back:focus-visible {
-      color: var(--fg);
-    }
-
-    .back:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 3px;
-      border-radius: 1px;
-    }
-
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 0.6rem;
-    }
-
-    .tagline {
-      color: var(--muted);
-      font-size: 0.9375rem;
-      letter-spacing: 0.01em;
-      margin-bottom: 2.5rem;
-    }
-
-    .rule {
-      width: 2rem;
-      height: 2px;
-      background: var(--green);
-      margin-bottom: 1.75rem;
-    }
+    main { max-width: 420px; }
 
     .field {
       display: flex;
@@ -114,10 +40,7 @@
       transition: border-color 0.15s ease;
     }
 
-    input[type="text"]:focus {
-      border-bottom-color: var(--green);
-    }
-
+    input[type="text"]:focus,
     input[type="text"]:focus-visible {
       border-bottom-color: var(--green);
     }
@@ -128,8 +51,6 @@
       border: none;
       cursor: pointer;
       font-family: inherit;
-      padding: 0;
-      /* Match .links a pattern */
       color: var(--gold);
       font-weight: 700;
       font-size: 0.9375rem;
@@ -167,7 +88,7 @@
 </head>
 <body>
   <main>
-    <a class="back" href="/">← Home</a>
+    <a class="back-link" href="/">← Home</a>
     <h1>Docs</h1>
     <p class="tagline">Enter a document code to continue.</p>
     <div class="rule" role="presentation"></div>
