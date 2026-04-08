@@ -39,6 +39,38 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* Playfair Display — display serif for headings (upright + italic, latin) */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/assets/fonts/playfair-upright-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/assets/fonts/playfair-italic-latin.woff2') format('woff2');
+}
+
+/* Maple Mono — monospace for code blocks (regular + bold) */
+@font-face {
+  font-family: 'Maple Mono NF';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/maple-mono-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Maple Mono NF';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/maple-mono-bold.woff2') format('woff2');
+}
+
 :root {
   --bg:      #F5F0E8;
   --fg:      #2B241B;
@@ -46,6 +78,10 @@
   --green:    #3D6B3E;
   --bronze:   #8B4513;
   --bronze-hi:#A05A2C;
+
+  --font-sans:  'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono:  'Maple Mono NF', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 *, *::before, *::after {
@@ -57,7 +93,7 @@
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Atkinson Hyperlegible Next', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
   min-height: 100vh;
@@ -159,4 +195,26 @@ h1 {
   letter-spacing: -0.03em;
   line-height: 1.1;
   margin-bottom: 0.6rem;
+}
+
+/* .display — opt-in serif heading (landing + post titles) */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Inline + block monospace — Maple Mono, globally applied */
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+pre {
+  font-family: var(--font-mono);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
 }
