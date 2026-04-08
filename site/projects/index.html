@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Julian Hicks</title>
+  <meta name="description" content="Personal projects by Julian Hicks — things built, shipped, or started and occasionally finished.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #F5F0E8;
+      --fg:      #2B241B;
+      --muted:   #5A5347;
+      --green:   #3D6B3E;
+      --gold:    #7A6020;
+      --gold-hi: #B8922E;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Atkinson Hyperlegible Next', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 8rem;
+    }
+
+    main {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .back {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      background-image: linear-gradient(var(--muted), var(--muted));
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease;
+    }
+
+    .back:hover,
+    .back:focus-visible {
+      background-size: 100% 1px;
+      outline: none;
+    }
+
+    .back:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Accent rule: short, deliberate, left-anchored */
+    .rule {
+      width: 2rem;
+      height: 2px;
+      background: var(--green);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Project list */
+    .project-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .project h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: 0;
+      margin-bottom: 0.25rem;
+    }
+
+    .project .meta {
+      color: var(--muted);
+      font-size: 0.8125rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .project .desc {
+      font-size: 0.9375rem;
+      color: var(--fg);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Project links — gold uppercase, smaller than landing nav */
+    .project-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .project-links a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 0.2rem 0;
+      background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
+      background-size: 0% 1.5px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease, color 0.15s ease;
+    }
+
+    .project-links a:hover,
+    .project-links a:focus-visible {
+      color: var(--gold-hi);
+      background-size: 100% 1.5px;
+      outline: none;
+    }
+
+    .project-links a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="/" class="back">← Home</a>
+    <h1>Projects</h1>
+    <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
+    <div class="rule" role="presentation"></div>
+    <ul class="project-list">
+      <li>
+        <article class="project">
+          <h2>levhicks.com</h2>
+          <p class="meta">2026 · HTML, CSS</p>
+          <p class="desc">This website. A scaffold-first attempt at keeping a small corner of the internet that loads fast and doesn't ask for anything.</p>
+          <nav class="project-links" aria-label="levhicks.com links">
+            <a href="#">View →</a>
+            <a href="#">GitHub →</a>
+          </nav>
+        </article>
+      </li>
+      <li>
+        <article class="project">
+          <h2>Unnamed reading tracker</h2>
+          <p class="meta">2025 · Python, SQLite</p>
+          <p class="desc">A CLI for logging books and extracting quotes into a searchable index. Built because existing apps wanted too much.</p>
+          <nav class="project-links" aria-label="Unnamed reading tracker links">
+            <a href="#">GitHub →</a>
+          </nav>
+        </article>
+      </li>
+      <li>
+        <article class="project">
+          <h2>Signal-to-noise dashboard</h2>
+          <p class="meta">2024 · Observable, D3</p>
+          <p class="desc">Small experiment visualizing what fraction of a given week's reading I actually remembered a month later.</p>
+          <nav class="project-links" aria-label="Signal-to-noise dashboard links">
+            <a href="#">View →</a>
+          </nav>
+        </article>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
