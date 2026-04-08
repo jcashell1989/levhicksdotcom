@@ -100,7 +100,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 6rem 2rem 8rem 10%;
+  padding: 10vw 2rem 8rem 10%;
 }
 
 main {
@@ -156,7 +156,7 @@ main {
   font-weight: 700;
   font-size: 0.9375rem;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   display: inline-block;
   padding: 0.2rem 0;
   background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
