@@ -200,8 +200,8 @@
     height: 100%;
     color: #2B241B;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     padding: 1.6rem 1.8rem;
     position: relative;
   }
@@ -210,8 +210,6 @@
   .tablet-idle .footer-line { color: #5A5347; }
   .tablet-idle .clock {
     text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
   }
   .tablet-idle .clock .time {
     font-size: 4.5rem;
@@ -232,6 +230,10 @@
     text-align: center;
     opacity: 0.85;
     font-weight: 400;
+    position: absolute;
+    bottom: 1.6rem;
+    left: 1.8rem;
+    right: 1.8rem;
   }
   .tablet-idle .footer-line strong { font-weight: 600; }
 
@@ -1076,7 +1078,6 @@
       <div class="tablet-frame">
         <div class="tablet-screen">
           <div class="tablet-idle">
-            <div></div>
             <div class="clock">
               <div class="time">10:42</div>
               <div class="date">Tuesday, April 7</div>
