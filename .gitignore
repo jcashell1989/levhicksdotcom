@@ -1,1 +1,23 @@
 .todos/
+.sidecar/
+.sidecar-agent
+.sidecar-task
+.sidecar-pr
+.sidecar-start.sh
+.sidecar-base
+.td-root
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OMC orchestration state (local only)
+.omc/
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
