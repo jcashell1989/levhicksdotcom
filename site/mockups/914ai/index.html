@@ -188,6 +188,8 @@
     min-height: 0;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Idle wallpaper state */
@@ -197,13 +199,15 @@
       radial-gradient(ellipse 95% 70% at 78% 78%, rgba(224, 195, 107, 0.65) 0%, transparent 60%),
       #F5F0E8;
     width: 100%;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
     color: #2B241B;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.6rem 1.8rem;
     position: relative;
+    overflow: hidden;
   }
   .tablet-idle .clock .time { color: #2B241B; text-shadow: 0 2px 20px rgba(245, 240, 232, 0.4); }
   .tablet-idle .clock .date { color: #4F473B; }
