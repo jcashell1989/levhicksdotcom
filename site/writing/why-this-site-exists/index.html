@@ -132,6 +132,16 @@
 
     .post-footer a:hover,
     .post-footer a:focus-visible { background-size: 100% 1px; outline: none; }
+
+    @media (prefers-color-scheme: dark) {
+      article.prose code,
+      article.prose pre {
+        background: rgba(245, 240, 232, 0.07);
+      }
+      .post-footer {
+        border-top-color: rgba(245, 240, 232, 0.1);
+      }
+    }
   </style>
 </head>
 <body>

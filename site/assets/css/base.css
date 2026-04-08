@@ -244,3 +244,16 @@ pre {
 @media (prefers-reduced-motion: reduce) {
   .site-mark { animation: none; }
 }
+
+/* ─── Dark mode ─────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #0B0B0B;
+    --fg:        #F5F0E8;
+    --muted:     #9C9A92;
+    --green:     #5E9460;
+    --bronze:    #C4813A;
+    --bronze-hi: #D4844A;
+  }
+
+}
