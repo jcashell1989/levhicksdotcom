@@ -1,0 +1,6 @@
+# Canonical host is julian.levhicks.com. Redirect apex + www here.
+# (These rules only fire for requests that hit this Netlify site. If
+# levhicks.com / www.levhicks.com are later pointed at a different
+# site, remove or adjust these.)
+https://levhicks.com/*      https://julian.levhicks.com/:splat  301!
+https://www.levhicks.com/*  https://julian.levhicks.com/:splat  301!
