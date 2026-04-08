@@ -1,0 +1,13 @@
+<svg width="512" height="128" viewBox="0 0 512 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mark scaled to fit 128px height -->
+  <g transform="translate(8,4) scale(0.47)">
+    <path d="M 72 32 L 132 32 L 132 112 L 116 128 L 116 224 L 72 224 Z" fill="#0B0B0B"/>
+    <path d="M 152 48 L 192 44 L 200 224 L 160 224 Z" fill="#0B0B0B"/>
+  </g>
+  <text x="140" y="76"
+        font-family="'Atkinson Hyperlegible Next', system-ui, sans-serif"
+        font-size="38"
+        font-weight="700"
+        fill="#0B0B0B"
+        letter-spacing="-0.5">Julian Hicks</text>
+</svg>

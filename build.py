@@ -132,6 +132,7 @@ def build() -> None:
         html = render(
             post_template,
             {
+                "SLUG": p.slug,
                 "TITLE": p.title,
                 "EXCERPT": p.excerpt,
                 "DATE_ISO": p.date.isoformat(),
