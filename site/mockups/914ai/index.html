@@ -185,6 +185,7 @@
     border-radius: 22px;
     width: 100%;
     height: 100%;
+    min-height: 0;
     overflow: hidden;
     position: relative;
   }
@@ -368,15 +369,15 @@
 
   /* ---- iPhone mockup for iMessage ---- */
   .phone-frame {
-    background: #1D1912;
+    background: #000;
     border-radius: 38px;
     padding: 12px;
-    box-shadow: 0 30px 80px rgba(29, 25, 18, 0.4);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     width: 280px;
     margin: 0 auto;
   }
   .phone-screen {
-    background: #FBF8F1;
+    background: #fff;
     border-radius: 28px;
     overflow: hidden;
     aspect-ratio: 9 / 16;
@@ -384,41 +385,40 @@
     flex-direction: column;
   }
   .phone-statusbar {
-    background: #EDE6D7;
-    padding: 0.7rem 1rem 0.4rem;
-    font-size: 0.7rem;
+    background: #fff;
+    padding: 0.5rem 1rem 0.3rem;
+    font-size: 0.65rem;
     display: flex;
     justify-content: space-between;
-    color: #2B241B;
+    color: #000;
     font-weight: 600;
   }
   .phone-header {
-    background: #EDE6D7;
+    background: #f2f2f7;
     text-align: center;
-    padding: 0.4rem 1rem 0.7rem;
-    border-bottom: 1px solid #D8D2C6;
+    padding: 0.3rem 1rem 0.6rem;
+    border-bottom: 1px solid #c6c6c8;
   }
   .phone-header .avatar {
     width: 36px; height: 36px;
     border-radius: 50%;
-    background: #EDE6D7;
-    border: 1px solid #C9A54E;
+    background: #c7c7cc;
     margin: 0 auto 0.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8A7028;
+    color: #fff;
     font-size: 0.75rem;
     font-weight: 600;
   }
   .phone-header .name {
     font-size: 0.7rem;
     font-weight: 600;
-    color: #2B241B;
+    color: #000;
   }
   .phone-messages {
     flex: 1;
-    background: #FBF8F1;
+    background: #fff;
     padding: 0.8rem 0.8rem 1rem;
     display: flex;
     flex-direction: column;
@@ -433,20 +433,20 @@
     line-height: 1.35;
   }
   .msg.in {
-    background: #E8E1CF;
-    color: #2B241B;
+    background: #e9e9eb;
+    color: #000;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
   }
   .msg.out {
-    background: linear-gradient(135deg, #5B8A5C, #3D6B3E);
-    color: #F5F0E8;
+    background: #007aff;
+    color: #fff;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
   }
   .msg-time {
     font-size: 0.6rem;
-    color: #5A5347;
+    color: #8e8e93;
     text-align: center;
     margin: 0.3rem 0;
     font-weight: 500;
@@ -926,6 +926,10 @@
       min-height: auto;       /* don't force 100vh — content dictates height */
       padding: 3rem 1.5rem;
     }
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;     /* hero always fills the screen */
+    }
     .mockup-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -982,11 +986,14 @@
     .solution .big-idea { font-size: 1.25rem; }
     .catch-grid { grid-template-columns: 1fr; }
     .privacy-cards, .future-cards { grid-template-columns: 1fr; }
-    /* Tablet frame: fluid, drop aspect-ratio so pending cards don't clip */
+    /* Tablet frame: fluid, restore aspect-ratio on mobile so screen fills frame */
     .tablet-frame {
       max-width: 100%;
-      aspect-ratio: auto;    /* was 4/3 — let content height be natural */
-      min-height: 280px;
+      aspect-ratio: 4 / 3;
+    }
+    /* Screen must fill the frame height */
+    .tablet-screen {
+      height: 100%;
     }
     .tablet-idle .clock .time { font-size: 3rem; }
     /* Phone frame: fluid, capped at original 280px */
@@ -1345,7 +1352,7 @@
           <div class="phone-statusbar">
             <span>10:42</span>
             <span style="display:flex;align-items:center;gap:3px;">
-              <svg width="14" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="13" height="9" rx="2"/><path d="M14 3.5v3a1 1 0 0 1 0-3z" fill="currentColor" stroke="none"/><rect x="2" y="2" width="9" height="6" rx="1" fill="currentColor" stroke="none"/></svg>
+              <svg width="14" height="8" viewBox="0 0 16 10" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="13" height="9" rx="2"/><path d="M14 3.5v3a1 1 0 0 1 0-3z" fill="#000" stroke="none"/><rect x="2" y="2" width="9" height="6" rx="1" fill="#000" stroke="none"/></svg>
               92%
             </span>
           </div>
