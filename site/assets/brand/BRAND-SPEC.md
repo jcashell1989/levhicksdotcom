@@ -71,6 +71,7 @@ M 152 48 L 192 44 L 200 224 L 160 224 Z
 |-------|-------|------|-----|
 | gold | `#7A6020` | `#B8922E` | Primary accent, links |
 | gold-hi | `#B8922E` | `#D4B24A` | Hover states |
+| green | `#3D6B3E` | `#5E9460` | Accent rule, focus outline, blockquote border |
 | slate | `#3A4A5A` | `#7A9AB4` | Secondary text, Chinese name |
 | sage | `#6B7D6D` | `#8FA88F` | Tertiary accent, tags |
 

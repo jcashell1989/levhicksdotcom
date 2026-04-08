@@ -18,6 +18,8 @@
   <meta property="og:url" content="https://julian.levhicks.com/projects/">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
+    main { max-width: 520px; }
+    .empty { color: var(--muted); font-style: italic; }
     /* Project listing */
     .project-list {
       list-style: none;
@@ -59,7 +61,7 @@
       font-weight: 700;
       font-size: 0.8125rem;
       letter-spacing: 0.04em;
-      text-transform: uppercase;
+      text-transform: lowercase;
       display: inline-block;
       padding: 0.2rem 0;
       background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
@@ -85,11 +87,13 @@
 </head>
 <body>
   <main>
-    <a href="/" class="back-link">← Home</a>
+    <nav aria-label="Back to home">
+      <a class="back-link" href="/">&#8592; Home</a>
+    </nav>
     <h1>Projects</h1>
     <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
     <div class="rule" role="presentation"></div>
-    <p style="color: var(--muted); font-style: italic;">Nothing here yet.</p>
+    <p class="empty">Nothing here yet.</p>
   </main>
 </body>
 </html>

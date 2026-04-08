@@ -104,7 +104,7 @@ def render(template: str, vars: dict) -> str:
 
 
 def fmt_month_year(d: date) -> str:
-    return d.strftime("%b %Y")
+    return d.strftime("%b %-d, %Y")
 
 
 def build() -> None:
