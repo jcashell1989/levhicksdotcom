@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Personal Smart Assistant</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #2B241B;
+    background: #F5F0E8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* cleo-parchment palette
+     bg-parchment     #F5F0E8
+     bg-parchment-2   #EDE6D7
+     fg-sepia         #2B241B
+     fg-sepia-muted   #5A5347
+     accent-gold      #C9A54E
+     accent-gold-dk   #8A7028
+     accent-sage      #5B8A5C
+     accent-sage-dk   #3D6B3E
+     accent-blue      #4C6673
+     accent-red       #8B3232
+     surface-dark     #1D1912
+     surface-card     #FBF8F1
+  */
+
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem;
+    scroll-snap-align: start;
+    position: relative;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ---- Preview badge ---- */
+  .preview-badge {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(29, 25, 18, 0.82);
+    color: #E0C36B;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 165, 78, 0.35);
+  }
+
+  /* ---- Slide 1: Hero ---- */
+  .hero {
+    background:
+      radial-gradient(ellipse 90% 70% at 22% 28%, rgba(126, 172, 124, 0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 70% at 78% 78%, rgba(224, 195, 107, 0.65) 0%, transparent 60%),
+      #F5F0E8;
+    color: #2B241B;
+    text-align: center;
+  }
+  .hero h1 { color: #2B241B; }
+  .hero .subtitle { color: #4F473B; }
+  .hero .scroll-hint { color: #5A5347; }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1.4rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+  }
+
+  .hero .scroll-hint {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2rem;
+  }
+
+  .hero .scroll-hint span {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    animation: bounce 2s ease infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ---- Slide 2: The Problem ---- */
+  .problem { background: #EDE6D7; }
+  .problem .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8B3232; margin-bottom: 1rem;
+  }
+  .problem h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.2; margin-bottom: 2rem; max-width: 700px;
+  }
+  .problem p {
+    font-size: 1.15rem; line-height: 1.8; color: #5A5347; max-width: 650px;
+  }
+  .problem .highlight {
+    background: linear-gradient(180deg, transparent 60%, #E0C36B 60%);
+    padding: 0 4px;
+  }
+
+  /* ---- Slide 3: The Solution ---- */
+  .solution { background: #F5F0E8; }
+  .solution .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 1rem;
+  }
+  .solution h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .solution .big-idea {
+    font-size: 1.6rem; font-weight: 300; color: #3D6B3E;
+    margin-bottom: 2.5rem; line-height: 1.4;
+  }
+  .solution p {
+    font-size: 1.15rem; line-height: 1.8; color: #5A5347; max-width: 650px;
+  }
+
+  /* ---- Tablet mockup ---- */
+  .tablet-frame {
+    background: #1D1912;
+    border-radius: 36px;
+    padding: 18px;
+    box-shadow: 0 30px 80px rgba(201, 165, 78, 0.25), 0 12px 32px rgba(29, 25, 18, 0.25);
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+  .tablet-frame::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    width: 3px;
+    height: 40px;
+    background: #4F473B;
+    border-radius: 2px;
+    transform: translateY(-50%);
+  }
+  .tablet-screen {
+    background: #1D1912;
+    border-radius: 22px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Idle wallpaper state */
+  .tablet-idle {
+    background:
+      radial-gradient(ellipse 95% 70% at 22% 28%, rgba(126, 172, 124, 0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 95% 70% at 78% 78%, rgba(224, 195, 107, 0.65) 0%, transparent 60%),
+      #F5F0E8;
+    width: 100%;
+    height: 100%;
+    color: #2B241B;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.6rem 1.8rem;
+    position: relative;
+  }
+  .tablet-idle .clock .time { color: #2B241B; text-shadow: 0 2px 20px rgba(245, 240, 232, 0.4); }
+  .tablet-idle .clock .date { color: #4F473B; }
+  .tablet-idle .footer-line { color: #5A5347; }
+  .tablet-idle .clock {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .tablet-idle .clock .time {
+    font-size: 4.5rem;
+    font-weight: 200;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .tablet-idle .clock .date {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    letter-spacing: 0.02em;
+  }
+  .tablet-idle .footer-line {
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+  .tablet-idle .footer-line strong { font-weight: 600; }
+
+  /* Pending list state */
+  .tablet-pending {
+    background: #F5F0E8;
+    width: 100%;
+    height: 100%;
+    color: #2B241B;
+    padding: 1.4rem 1.4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .tablet-pending .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+  .tablet-pending .header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .tablet-pending .header .date {
+    font-size: 0.8rem;
+    color: #5A5347;
+  }
+  .tablet-pending .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .pending-card {
+    background: #FBF8F1;
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 1px 3px rgba(43, 36, 27, 0.05), 0 4px 12px rgba(43, 36, 27, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .pending-card .pc-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #EDE6D7;
+    border: 1px solid #D8D2C6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8A7028;
+    flex-shrink: 0;
+  }
+  .pending-card .pc-text { flex: 1; min-width: 0; }
+  .pending-card .pc-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pending-card .pc-when {
+    font-size: 0.78rem;
+    color: #5A5347;
+  }
+  .pending-card .pc-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .pending-card .btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pending-card .btn-confirm { background: #D6E5CB; color: #3D6B3E; }
+  .pending-card .btn-dismiss { background: #E8D0CB; color: #8B3232; }
+  .tablet-pending .mic-bar {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.6rem;
+  }
+  .mic-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #EDE6D7;
+    border: 1px solid #C9A54E;
+    color: #8A7028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---- Mockup slide layouts ---- */
+  .mockup-slide { background: #EDE6D7; }
+  .mockup-slide.dark {
+    background: linear-gradient(135deg, #1D1912 0%, #2B241B 100%);
+    color: #F5F0E8;
+  }
+  .mockup-slide.dark .label { color: #E0C36B; }
+  .mockup-slide.dark p { color: rgba(245, 240, 232, 0.82); }
+  .mockup-slide .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 1rem;
+  }
+  .mockup-slide h2 {
+    font-size: 2rem; font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .mockup-slide .lead {
+    font-size: 1.05rem; line-height: 1.6; color: #5A5347;
+    margin-bottom: 2rem; max-width: 540px;
+  }
+  .mockup-slide.dark .lead { color: rgba(245, 240, 232, 0.8); }
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .mockup-grid.single { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+
+  /* ---- iPhone mockup for iMessage ---- */
+  .phone-frame {
+    background: #1D1912;
+    border-radius: 38px;
+    padding: 12px;
+    box-shadow: 0 30px 80px rgba(29, 25, 18, 0.4);
+    width: 280px;
+    margin: 0 auto;
+  }
+  .phone-screen {
+    background: #FBF8F1;
+    border-radius: 28px;
+    overflow: hidden;
+    aspect-ratio: 9 / 16;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-statusbar {
+    background: #EDE6D7;
+    padding: 0.7rem 1rem 0.4rem;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    color: #2B241B;
+    font-weight: 600;
+  }
+  .phone-header {
+    background: #EDE6D7;
+    text-align: center;
+    padding: 0.4rem 1rem 0.7rem;
+    border-bottom: 1px solid #D8D2C6;
+  }
+  .phone-header .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #EDE6D7;
+    border: 1px solid #C9A54E;
+    margin: 0 auto 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8A7028;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .phone-header .name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #2B241B;
+  }
+  .phone-messages {
+    flex: 1;
+    background: #FBF8F1;
+    padding: 0.8rem 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+  }
+  .msg {
+    max-width: 78%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 18px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+  .msg.in {
+    background: #E8E1CF;
+    color: #2B241B;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .msg.out {
+    background: linear-gradient(135deg, #5B8A5C, #3D6B3E);
+    color: #F5F0E8;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-time {
+    font-size: 0.6rem;
+    color: #5A5347;
+    text-align: center;
+    margin: 0.3rem 0;
+    font-weight: 500;
+  }
+
+  /* ---- Voice mockup ---- */
+  .voice-mock {
+    background: #FBF8F1;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 40px rgba(29, 25, 18, 0.25);
+    max-width: 420px;
+  }
+  .voice-mock .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .voice-mock .step:last-child { margin-bottom: 0; }
+  .voice-mock .step .ico {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: #EDE6D7;
+    border: 1px solid #D8D2C6;
+    color: #8A7028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .voice-mock .step .who {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8A7028;
+    margin-bottom: 0.2rem;
+  }
+  .voice-mock .step .said {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: #2B241B;
+  }
+  .voice-mock .step.user .ico {
+    background: #FBF8F1;
+    border-color: #C9A54E;
+    color: #8A7028;
+  }
+
+  /* ---- Memory mockup ---- */
+  .memory-card {
+    background: #FBF8F1;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 40px rgba(29, 25, 18, 0.1);
+    max-width: 460px;
+  }
+  .memory-card h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8A7028;
+    margin-bottom: 0.6rem;
+  }
+  .memory-card .quote {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #2B241B;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .memory-card .sep {
+    border: none;
+    border-top: 1px solid #D8D2C6;
+    margin: 1rem 0;
+  }
+  .memory-card .reply {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #5A5347;
+  }
+  .memory-card .reply strong { color: #3D6B3E; }
+
+  /* ---- Trip timeline mockup ---- */
+  .trip-card {
+    background: #FBF8F1;
+    border: 1px solid #E8E1CF;
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 12px 40px rgba(29, 25, 18, 0.08);
+    max-width: 480px;
+  }
+  .trip-card .trip-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid #E8E1CF;
+    margin-bottom: 1rem;
+  }
+  .trip-card .trip-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #2B241B;
+    letter-spacing: -0.01em;
+  }
+  .trip-card .trip-subtitle {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8A7028;
+    margin-top: 0.15rem;
+  }
+  .trip-card .trip-dates {
+    font-size: 0.8rem;
+    color: #5A5347;
+    text-align: right;
+  }
+  .trip-card .trip-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    position: relative;
+  }
+  .trip-card .trip-timeline::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: #E8E1CF;
+    z-index: 0;
+  }
+  .trip-card .trip-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+  .trip-card .trip-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #F5F0E8;
+    border: 1px solid #D8D2C6;
+    color: #8A7028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .trip-card .trip-row.updated .trip-dot {
+    border-color: #C9A54E;
+    background: #FBF3DC;
+    color: #8A7028;
+  }
+  .trip-card .trip-body { flex: 1; min-width: 0; padding-top: 0.2rem; }
+  .trip-card .trip-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8A7028;
+    margin-bottom: 0.1rem;
+  }
+  .trip-card .trip-primary {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2B241B;
+    line-height: 1.3;
+  }
+  .trip-card .trip-meta {
+    font-size: 0.78rem;
+    color: #5A5347;
+    margin-top: 0.1rem;
+  }
+  .trip-card .trip-row.updated .trip-meta strong {
+    color: #8B3232;
+  }
+  .trip-card .trip-note {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #E8E1CF;
+    font-size: 0.78rem;
+    color: #5A5347;
+    font-style: italic;
+  }
+
+  /* ---- How it works ---- */
+  .how-it-works { background: #EDE6D7; }
+  .how-it-works .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 1rem;
+  }
+  .how-it-works h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+  .steps { display: flex; flex-direction: column; gap: 1.5rem; }
+  .step-row {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+  }
+  .step-icon {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    border-radius: 16px;
+    background: #FBF8F1;
+    border: 1px solid #D8D2C6;
+    color: #8A7028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-text { padding-top: 0.2rem; }
+  .step-text strong {
+    display: block; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem;
+  }
+  .step-text span {
+    font-size: 1rem; color: #5A5347; line-height: 1.5;
+  }
+
+  /* ---- Catches ---- */
+  .catches {
+    background: linear-gradient(135deg, #1D1912 0%, #2B241B 100%);
+    color: #F5F0E8;
+  }
+  .catches::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top right, rgba(201, 165, 78, 0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(91, 138, 92, 0.12) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .catches .container { position: relative; }
+  .catches h2 { color: #E0C36B; }
+  .catches .catch-item .icon { color: #C9A54E; }
+  .catches .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; opacity: 0.7; margin-bottom: 1rem;
+  }
+  .catches h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+  .catch-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem;
+  }
+  .catch-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 1.1rem; font-weight: 400; padding: 0.7rem 0;
+  }
+  .catch-item .icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #C9A54E;
+  }
+
+  /* ---- Privacy ---- */
+  .privacy { background: #F5F0E8; }
+  .privacy .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #3D6B3E; margin-bottom: 1rem;
+  }
+  .privacy h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2rem;
+  }
+  .privacy-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .privacy-card {
+    background: #FBF8F1; border-radius: 16px; padding: 1.8rem; text-align: center;
+    border: 1px solid #E8E1CF;
+  }
+  .privacy-card .card-icon {
+    width: 48px; height: 48px; margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    color: #5B8A5C;
+  }
+  .privacy-card h3 {
+    font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .privacy-card p {
+    font-size: 0.9rem; color: #5A5347; line-height: 1.5;
+  }
+
+  /* ---- Getting started ---- */
+  .getting-started { background: #EDE6D7; }
+  .getting-started .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 1rem;
+  }
+  .getting-started h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2.5rem;
+  }
+  .start-steps {
+    display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem;
+  }
+  .start-step {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+  }
+  .start-num {
+    flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+    background: #EDE6D7;
+    border: 1px solid #C9A54E;
+    color: #8A7028; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 700;
+  }
+  .start-step p {
+    font-size: 1.15rem; line-height: 1.6; color: #2B241B; padding-top: 0.4rem;
+  }
+  .note {
+    background: #FBF8F1; border: 1px solid #D8D2C6; border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.95rem; color: #5A5347; line-height: 1.6;
+  }
+
+  /* ---- Future ---- */
+  .future { background: #F5F0E8; }
+  .future .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #7A0558; margin-bottom: 1rem;
+  }
+  .future h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem;
+  }
+  .future .subhead {
+    font-size: 1.1rem; color: #5A5347; margin-bottom: 2.5rem;
+  }
+  .future-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .future-card {
+    background: #FBF8F1; border: 1px solid #E8E1CF; border-radius: 16px; padding: 1.8rem;
+  }
+  .future-card .card-icon {
+    width: 44px; height: 44px; margin-bottom: 0.8rem;
+    display: flex; align-items: center; justify-content: center;
+    color: #8A7028;
+  }
+  .future-card h3 {
+    font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .future-card p {
+    font-size: 0.9rem; color: #5A5347; line-height: 1.5;
+  }
+
+  /* ---- Practical (merged) slide ---- */
+  .practical { background: #EDE6D7; }
+  .practical .label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 1rem;
+  }
+  .practical h2 {
+    font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+  .practical .subhead {
+    font-size: 1.05rem; color: #5A5347; margin-bottom: 2.5rem; max-width: 620px;
+  }
+  .practical-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .practical-card {
+    background: #FBF8F1; border: 1px solid #E8E1CF; border-radius: 16px;
+    padding: 1.6rem;
+  }
+  .practical-card .pc-label {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #8A7028; margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .practical-card .pc-label svg { width: 16px; height: 16px; }
+  .practical-card h3 {
+    font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem; color: #2B241B;
+    letter-spacing: -0.01em;
+  }
+  .practical-card ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .practical-card li {
+    font-size: 0.88rem; color: #5A5347; line-height: 1.55;
+    padding: 0.35rem 0 0.35rem 1.1rem; position: relative;
+  }
+  .practical-card li::before {
+    content: '—'; position: absolute; left: 0; color: #C9A54E; font-weight: 600;
+  }
+
+  /* ---- CTA blocks (final slide) ---- */
+  .cta-section { background: #F5F0E8; }
+  .cta-section .closing-head {
+    text-align: center; margin-bottom: 2.5rem;
+  }
+  .cta-section .closing-head h2 {
+    font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 0.8rem; color: #2B241B;
+  }
+  .cta-section .closing-head p {
+    font-size: 1.1rem; color: #5A5347; max-width: 560px; margin: 0 auto;
+  }
+  .cta-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem;
+    margin-bottom: 2.5rem;
+  }
+  .cta-card {
+    background: #FBF8F1; border: 1px solid #E8E1CF; border-radius: 16px;
+    padding: 1.6rem;
+    display: flex; flex-direction: column;
+  }
+  .cta-card .cta-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    color: #8A7028;
+    border-radius: 10px; background: #EDE6D7;
+    border: 1px solid #E0C36B;
+  }
+  .cta-card h3 {
+    font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #2B241B;
+    letter-spacing: -0.01em;
+  }
+  .cta-card p.cta-lead {
+    font-size: 0.85rem; color: #5A5347; line-height: 1.5; margin-bottom: 0.9rem;
+  }
+  .cta-card ul { list-style: none; padding: 0; margin: 0 0 auto 0; }
+  .cta-card li {
+    font-size: 0.85rem; color: #5A5347; line-height: 1.55;
+    padding: 0.3rem 0 0.3rem 1rem; position: relative;
+  }
+  .cta-card li::before {
+    content: '\2022'; position: absolute; left: 0; color: #C9A54E; font-weight: 700;
+  }
+  .cta-future {
+    background: #EDE6D7; border: 1px solid #D8D2C6;
+    border-radius: 16px; padding: 1.4rem 1.6rem; margin-bottom: 2rem;
+  }
+  .cta-future .cf-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #7A0558; margin-bottom: 0.8rem;
+  }
+  .cta-future-list {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+  }
+  .cta-future-item {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+  }
+  .cta-future-item .cfi-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #8A7028;
+  }
+  .cta-future-item .cfi-text strong {
+    display: block; font-size: 0.92rem; font-weight: 600; color: #2B241B;
+    margin-bottom: 0.1rem;
+  }
+  .cta-future-item .cfi-text span {
+    font-size: 0.8rem; color: #5A5347; line-height: 1.45;
+  }
+  .cta-tagline {
+    text-align: center; font-size: 0.9rem; font-style: italic;
+    color: #5A5347; opacity: 0.85;
+  }
+  @media (max-width: 800px) {
+    .practical-grid, .cta-grid, .cta-future-list { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Closing ---- */
+  .closing {
+    background:
+      radial-gradient(ellipse 90% 70% at 22% 28%, rgba(126, 172, 124, 0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 70% at 78% 78%, rgba(224, 195, 107, 0.65) 0%, transparent 60%),
+      #F5F0E8;
+    color: #2B241B;
+    text-align: center;
+  }
+  .closing h2 { color: #2B241B; }
+  .closing p { color: #4F473B; opacity: 1; }
+  .closing .tagline { color: #5A5347; opacity: 1; }
+  .closing h2 {
+    font-size: 2.8rem; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .closing p {
+    font-size: 1.2rem; font-weight: 300; opacity: 0.92;
+    max-width: 550px; margin: 0 auto; line-height: 1.6;
+  }
+  .closing .tagline {
+    margin-top: 3rem; font-size: 0.95rem; font-style: italic; opacity: 0.75;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 800px) {
+    .mockup-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media (max-width: 700px) {
+    section { padding: 3rem 1.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    h2 { font-size: 1.8rem !important; }
+    .solution .big-idea { font-size: 1.3rem; }
+    .catch-grid { grid-template-columns: 1fr; }
+    .privacy-cards, .future-cards { grid-template-columns: 1fr; }
+    .closing h2 { font-size: 2rem; }
+    .tablet-frame { max-width: 100%; }
+    .tablet-idle .clock .time { font-size: 3rem; }
+  }
+
+  /* ---- Print ---- */
+  @media print {
+    section { min-height: auto; page-break-after: always; padding: 2rem; }
+    html { scroll-snap-type: none; }
+    .preview-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-badge">Preview &middot; not running yet</div>
+
+<!-- Slide 1: Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>Your trips,<br>assembled.</h1>
+    <p class="subtitle">One trip. Six emails. The flight, the hotel, the car, the dinner, the gate change &mdash; all in one place, automatically.</p>
+    <div class="scroll-hint">
+      Scroll to see how it works
+      <span>&darr;</span>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 2: The Problem -->
+<section class="problem">
+  <div class="container">
+    <div class="label">The Problem</div>
+    <h2>Booking the trip is the easy part.<br>Keeping it together is the hard part.</h2>
+    <p>
+      One trip, six emails. The Lufthansa confirmation in one inbox. The hotel from
+      a different sender. The car transfer from a third. The dinner reservation you
+      made yourself. The gate change that arrives at 2 a.m. local time.
+    </p>
+    <br>
+    <p>
+      Half the itinerary lives in your inbox, half on your calendar, half in your head.
+      And the minute something changes, <span class="highlight">it's all scattered again</span>.
+    </p>
+  </div>
+</section>
+
+<!-- Slide 3: The Solution (merged with tablet idle) -->
+<section class="mockup-slide">
+  <div class="container">
+    <div class="mockup-grid">
+      <div>
+        <div class="label">The Solution</div>
+        <h2>One place where the whole trip lives.</h2>
+        <p class="lead">
+          The assistant reads your mail, pulls the pieces together, and assembles the trip
+          &mdash; automatically, as confirmations arrive. A tablet on your desk shows a nice
+          photo when there's nothing to look at, and the whole trip on one clean page when
+          there is. You still use Apple Calendar and your iPhone, just like always. Nothing
+          new to learn.
+        </p>
+      </div>
+      <div class="tablet-frame">
+        <div class="tablet-screen">
+          <div class="tablet-idle">
+            <div></div>
+            <div class="clock">
+              <div class="time">10:42</div>
+              <div class="date">Tuesday, April 7</div>
+            </div>
+            <div class="footer-line">Nothing to review &middot; <strong>Next:</strong> Capri trip in 5 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 4 (MOVED): Trip assembly — the big wow -->
+<section class="mockup-slide">
+  <div class="container">
+    <div class="mockup-grid">
+      <div>
+        <div class="label">The big one &middot; trip assembly</div>
+        <h2>Six emails become one trip.</h2>
+        <p class="lead">
+          As each confirmation arrives &mdash; the Lufthansa booking, the Villa Brunella
+          reservation, the ferry, the dinner at Da Gelsomina &mdash; the assistant
+          quietly slots it into the right place. When a gate changes at 2 a.m., the
+          timeline updates itself. Ask "when am I in Capri?" and it tells you everything,
+          in order.
+        </p>
+      </div>
+      <div class="trip-card">
+        <div class="trip-head">
+          <div>
+            <div class="trip-title">Capri</div>
+            <div class="trip-subtitle">Assembled from 6 emails</div>
+          </div>
+          <div class="trip-dates">
+            May 12 &ndash; May 16<br>
+            <span style="opacity:0.7;">4 days</span>
+          </div>
+        </div>
+        <div class="trip-timeline">
+          <div class="trip-row">
+            <div class="trip-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            </div>
+            <div class="trip-body">
+              <div class="trip-label">Tue May 12 &middot; Departure</div>
+              <div class="trip-primary">LH 458 &middot; SFO &rarr; FRA</div>
+              <div class="trip-meta">6:45 pm SFO &middot; arrives 2:30 pm FRA</div>
+            </div>
+          </div>
+          <div class="trip-row updated">
+            <div class="trip-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            </div>
+            <div class="trip-body">
+              <div class="trip-label">Wed May 13 &middot; Connection</div>
+              <div class="trip-primary">LH 1848 &middot; FRA &rarr; NAP</div>
+              <div class="trip-meta">Gate <strong>A22 &rarr; A14</strong> &middot; updated 02:17 CET</div>
+            </div>
+          </div>
+          <div class="trip-row">
+            <div class="trip-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22v-6.57"/><path d="M12 11h.01"/><path d="M12 7h.01"/><path d="M14 15.43V22"/><path d="M15 16a5 5 0 0 0-6 0"/><path d="M16 11h.01"/><path d="M16 7h.01"/><path d="M8 11h.01"/><path d="M8 7h.01"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg>
+            </div>
+            <div class="trip-body">
+              <div class="trip-label">Wed May 13 &middot; Check-in</div>
+              <div class="trip-primary">Villa Brunella</div>
+              <div class="trip-meta">Via Tragara 24 &middot; porter meets the 3:20 pm ferry at Marina Grande</div>
+            </div>
+          </div>
+          <div class="trip-row">
+            <div class="trip-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6h5"/><path d="M21 15v7"/></svg>
+            </div>
+            <div class="trip-body">
+              <div class="trip-label">Thu May 14 &middot; Dinner</div>
+              <div class="trip-primary">Da Gelsomina alla Migliara</div>
+              <div class="trip-meta">Anacapri &middot; 8:00 pm &middot; end of the Migliara path, the one with the view</div>
+            </div>
+          </div>
+          <div class="trip-row">
+            <div class="trip-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            </div>
+            <div class="trip-body">
+              <div class="trip-label">Sat May 16 &middot; Return</div>
+              <div class="trip-primary">LH 457 &middot; FRA &rarr; SFO</div>
+              <div class="trip-meta">Via NAP morning connection</div>
+            </div>
+          </div>
+        </div>
+        <div class="trip-note">
+          Assembled from messages in your Gmail and iCloud accounts. Ask the assistant to change anything.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 5 (NEW): Tablet pending mockup -->
+<section class="mockup-slide">
+  <div class="container">
+    <div class="mockup-grid">
+      <div class="tablet-frame">
+        <div class="tablet-screen">
+          <div class="tablet-pending">
+            <div class="header">
+              <h3>To review</h3>
+              <div class="date">Tue, Apr 7</div>
+            </div>
+            <div class="cards">
+              <div class="pending-card">
+                <div class="pc-icon">
+                  <!-- lucide: plane -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                </div>
+                <div class="pc-text">
+                  <div class="pc-title">LH 458 &middot; SFO &rarr; FRA</div>
+                  <div class="pc-when">Tue May 12 &middot; 6:45 pm</div>
+                </div>
+                <div class="pc-actions">
+                  <button class="btn btn-confirm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                  <button class="btn btn-dismiss">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="pending-card">
+                <div class="pc-icon">
+                  <!-- lucide: hotel -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22v-6.57"/><path d="M12 11h.01"/><path d="M12 7h.01"/><path d="M14 15.43V22"/><path d="M15 16a5 5 0 0 0-6 0"/><path d="M16 11h.01"/><path d="M16 7h.01"/><path d="M8 11h.01"/><path d="M8 7h.01"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg>
+                </div>
+                <div class="pc-text">
+                  <div class="pc-title">Villa Brunella, Capri</div>
+                  <div class="pc-when">Wed May 13 &ndash; Sat May 16</div>
+                </div>
+                <div class="pc-actions">
+                  <button class="btn btn-confirm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                  <button class="btn btn-dismiss">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="pending-card">
+                <div class="pc-icon">
+                  <!-- lucide: utensils -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6h5"/><path d="M21 15v7"/></svg>
+                </div>
+                <div class="pc-text">
+                  <div class="pc-title">Da Gelsomina &middot; Anacapri</div>
+                  <div class="pc-when">Thu May 14 &middot; 8:00 pm</div>
+                </div>
+                <div class="pc-actions">
+                  <button class="btn btn-confirm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                  <button class="btn btn-dismiss">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mic-bar">
+              <div class="mic-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="label">On your desk &middot; when there's news</div>
+        <h2>When something new comes up, it shows you a clean list.</h2>
+        <p class="lead">
+          Tap the green check to add it to your calendar. Tap the red &times; to throw it
+          away. That's the whole interaction. The microphone is right there if you want
+          to ask it something instead.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 6 (NEW): Voice + Memory merged — "talk to it, and it knows you" -->
+<section class="mockup-slide dark">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 2rem;">
+      <div class="label">Talk to it &middot; it knows you</div>
+      <h2 style="max-width: 640px; margin: 0 auto;">Ask the way you'd ask a person.</h2>
+    </div>
+    <div class="mockup-grid">
+      <div class="voice-mock">
+        <div class="step user">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
+          </div>
+          <div>
+            <div class="who">You said</div>
+            <div class="said">"When am I going to Capri again?"</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2"/><path d="M6 8v8"/><path d="M10 5v14"/><path d="M14 8v8"/><path d="M18 10v4"/><path d="M22 12h-2"/></svg>
+          </div>
+          <div>
+            <div class="who">Assistant</div>
+            <div class="said">Tuesday May 12. Lufthansa 458 from SFO at quarter to seven, connecting through Frankfurt. You're at Villa Brunella through Saturday.</div>
+          </div>
+        </div>
+        <div class="step user">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
+          </div>
+          <div>
+            <div class="who">You said</div>
+            <div class="said">"Move the Gelsomina dinner to Friday."</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2"/><path d="M6 8v8"/><path d="M10 5v14"/><path d="M14 8v8"/><path d="M18 10v4"/><path d="M22 12h-2"/></svg>
+          </div>
+          <div>
+            <div class="who">Assistant</div>
+            <div class="said">Moved. Da Gelsomina, Friday May 15 at eight. I'll let them know.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="lead" style="margin-bottom: 0;">
+          You don't need to remember commands. It already knows the places you go, the
+          flights you take, and the people you're meeting. When you say "Capri," it knows
+          you mean Villa Brunella. When you say "the Frankfurt connection," it knows
+          which flight. Ask it anything about a trip and get an answer &mdash; not a list of
+          emails to go dig through.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 8 (NEW): iMessage mockup -->
+<section class="mockup-slide">
+  <div class="container">
+    <div class="mockup-grid">
+      <div>
+        <div class="label">Quiet, by default</div>
+        <h2>It only texts you when it matters.</h2>
+        <p class="lead">
+          The gate change at 2 a.m.? Yes, that's worth a ping. A promotional "deal on your next trip"?
+          No. The assistant is tuned for signal, not noise &mdash; and if it ever gets it wrong, you tell
+          it once and it learns. When you're not at your desk, it texts you the things that are
+          actually actionable. Reply like a person &mdash; it understands.
+        </p>
+        <div style="margin-top: 1.2rem; padding: 0.9rem 1rem; border: 1px dashed #E0C36B; border-radius: 10px; font-size: 0.85rem; color: #5A5347;">
+          <strong style="color:#8A7028;">What it won't bother you with:</strong>
+          marketing emails, your own sent confirmations, newsletters, generic receipts, or anything
+          you've told it to ignore.
+        </div>
+        <div style="margin-top: 0.8rem; padding: 0.9rem 1rem; border: 1px solid #7EAC7C; background: #F2F7EC; border-radius: 10px; font-size: 0.85rem; color: #5A5347;">
+          <strong style="color:#3D6B3E;">It works the other way too.</strong>
+          Something show up in WhatsApp, an airline app, or a travel agent's portal?
+          Screenshot it and text the picture to the assistant &mdash; it reads the image and
+          adds it to the trip, just like an email.
+        </div>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>10:42</span>
+            <span style="display:flex;align-items:center;gap:3px;">
+              <svg width="14" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="0.5" y="0.5" width="13" height="9" rx="2"/><path d="M14 3.5v3a1 1 0 0 1 0-3z" fill="currentColor" stroke="none"/><rect x="2" y="2" width="9" height="6" rx="1" fill="currentColor" stroke="none"/></svg>
+              92%
+            </span>
+          </div>
+          <div class="phone-header">
+            <div class="avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2"/><path d="M6 8v8"/><path d="M10 5v14"/><path d="M14 8v8"/><path d="M18 10v4"/><path d="M22 12h-2"/></svg>
+            </div>
+            <div class="name">Smart Assistant</div>
+          </div>
+          <div class="phone-messages">
+            <div class="msg-time">Wed May 13, 2:17 AM</div>
+            <div class="msg in">Heads up: LH 1848 (FRA&rarr;NAP) gate moved to A14 (was A22). Departure still 10:05. Updated on your calendar.</div>
+            <div class="msg out">ok, thanks</div>
+            <div class="msg-time">Wed 8:40 AM</div>
+            <div class="msg out">how am I getting to the hotel?</div>
+            <div class="msg in">Villa Brunella's porter meets the 3:20 pm hydrofoil at Marina Grande. Funicular up to Capri town, then walk down Via Tragara &mdash; about 8 minutes. No car needed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Slide 10: What It Catches -->
+<section class="catches">
+  <div class="container">
+    <div class="label">From the first confirmation to the last gate change</div>
+    <h2>What it catches</h2>
+    <div class="catch-grid">
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: plane --><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+        Flights &amp; connections
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: hotel --><path d="M10 22v-6.57"/><path d="M12 11h.01"/><path d="M12 7h.01"/><path d="M14 15.43V22"/><path d="M15 16a5 5 0 0 0-6 0"/><path d="M16 11h.01"/><path d="M16 7h.01"/><path d="M8 11h.01"/><path d="M8 7h.01"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg></span>
+        Hotels &amp; check-in details
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: car --><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg></span>
+        Rental cars &amp; transfers
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: refresh-cw --><path d="M21 12a9 9 0 0 0-15-6.7L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"/><path d="M21 21v-5h-5"/></svg></span>
+        Gate &amp; itinerary changes
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: utensils --><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6h5"/><path d="M21 15v7"/></svg></span>
+        Restaurant reservations
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: stethoscope --><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg></span>
+        Doctor &amp; dentist appointments
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: credit-card --><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+        Bills &amp; due dates
+      </div>
+      <div class="catch-item">
+        <span class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><!-- lucide: ticket --><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+        Event tickets &amp; RSVPs
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 9 (MERGED): The practical stuff — privacy + setup + how it works -->
+<section class="practical">
+  <div class="container">
+    <div class="label">The practical stuff</div>
+    <h2>The things you'd reasonably ask about.</h2>
+    <p class="subhead">It runs on your iMac. You don't set anything up. Your email never leaves your house.</p>
+    <div class="practical-grid">
+      <div class="practical-card">
+        <div class="pc-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Where it runs
+        </div>
+        <h3>Quietly on your iMac.</h3>
+        <ul>
+          <li>Runs on the iMac you already have, at home</li>
+          <li>Nothing lives in a company's cloud</li>
+          <li>Your email never leaves your house</li>
+          <li>Only looks for dates and events &mdash; doesn't summarize your mail</li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <div class="pc-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          What you do to set it up
+        </div>
+        <h3>Almost nothing.</h3>
+        <ul>
+          <li>Julian handles the technical side on your iMac</li>
+          <li>A tablet goes on your desk &mdash; no new apps to install</li>
+          <li>You keep using Apple Calendar, iMessage, and Siri exactly like before</li>
+          <li>For the first two weeks, new events appear in a different color so you can review them</li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <div class="pc-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          What a normal day looks like
+        </div>
+        <h3>Most of the time, nothing.</h3>
+        <ul>
+          <li>An email arrives about something with a date</li>
+          <li>The tablet shows it &mdash; tap to confirm, tap to dismiss</li>
+          <li>iMessage backs it up if you're not home</li>
+          <li>If it gets something wrong, tell it once and it learns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 10 (FINAL): Closing + Future + CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="closing-head">
+      <h2>Your schedule, handled.</h2>
+      <p>No new apps, no subscriptions. Before I build it for real, I want to show it to you and hear what you think.</p>
+    </div>
+
+    <div class="cta-grid">
+      <div class="cta-card">
+        <div class="cta-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h3>What this costs</h3>
+        <p class="cta-lead">Nothing you aren't already paying for lives in the cloud.</p>
+        <ul>
+          <li>One-time: $0 &mdash; we reuse the iPad you already have</li>
+          <li>Ongoing: less than $1 a day (the AI that reads your mail)</li>
+          <li>No subscription, no monthly fee, no account to manage</li>
+        </ul>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>I need your eye on this</h3>
+        <p class="cta-lead">This is a mockup, not the real thing yet. Before I build it:</p>
+        <ul>
+          <li>Does the tablet feel useful, or like clutter?</li>
+          <li>Is the tone right, or too casual?</li>
+          <li>Would you actually tap it and talk to it?</li>
+          <li>Anything I've missed about how you handle travel?</li>
+        </ul>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4"/><polyline points="12 2 12 15"/><polyline points="8 6 12 2 16 6"/></svg>
+        </div>
+        <h3>What I'd need from you</h3>
+        <p class="cta-lead">To build it well, a few things:</p>
+        <ul>
+          <li>20 minutes to walk me through your usual trip workflow</li>
+          <li>Access to your iMac so I can set it up</li>
+          <li>A spot on your desk for the tablet</li>
+          <li>Your input on the assistant's voice &mdash; tone, pace, accent</li>
+          <li>Patience for a rough first couple of weeks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-future">
+      <div class="cf-label">Down the road, once this is working</div>
+      <div class="cta-future-list">
+        <div class="cta-future-item">
+          <div class="cfi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49"/><path d="M7.76 7.76a6 6 0 0 0 0 8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div class="cfi-text">
+            <strong>Home Intercom</strong>
+            <span>"Tell Dad dinner's ready" &mdash; announces in another room.</span>
+          </div>
+        </div>
+        <div class="cta-future-item">
+          <div class="cfi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          </div>
+          <div class="cfi-text">
+            <strong>Errand Memory</strong>
+            <span>"Remind me to ask the doctor about my knee" &mdash; surfaced at the right moment.</span>
+          </div>
+        </div>
+        <div class="cta-future-item">
+          <div class="cfi-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </div>
+          <div class="cfi-text">
+            <strong>Morning Briefing</strong>
+            <span>Your schedule, the weather, what to remember &mdash; read out each morning.</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1.2rem; font-size: 0.88rem; color: #5A5347; font-style: italic; text-align: center;">
+        &mdash; and anything else a modern AI can do. If you think of it, we can probably build it.
+      </p>
+    </div>
+
+    <p class="cta-tagline">Built with love by Julian.</p>
+  </div>
+</section>
+
+</body>
+</html>

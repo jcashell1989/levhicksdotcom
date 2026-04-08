@@ -1,0 +1,38 @@
+{"ts":"2026-04-07T17:05:07.982925-07:00","cmd":"init","session":"ses_85f913","ok":true,"dur_ms":130}
+{"ts":"2026-04-07T17:06:58.224431-07:00","cmd":"usage","flags":{"new-session":"true"},"session":"ses_739906","ok":true,"dur_ms":57}
+{"ts":"2026-04-07T17:12:57.440524-07:00","cmd":"create","session":"ses_739906","ok":true,"dur_ms":81}
+{"ts":"2026-04-07T17:12:57.567231-07:00","cmd":"create","session":"ses_739906","ok":true,"dur_ms":71}
+{"ts":"2026-04-07T17:12:57.681606-07:00","cmd":"create","session":"ses_739906","ok":true,"dur_ms":77}
+{"ts":"2026-04-07T17:12:57.795923-07:00","cmd":"create","session":"ses_739906","ok":true,"dur_ms":69}
+{"ts":"2026-04-07T17:13:00.639509-07:00","cmd":"usage","flags":{"quiet":"true"},"session":"ses_739906","ok":true,"dur_ms":43}
+{"ts":"2026-04-07T17:13:03.305007-07:00","cmd":"next","session":"ses_739906","ok":true,"dur_ms":2}
+{"ts":"2026-04-07T17:24:08.129844-07:00","cmd":"start","session":"ses_739906","ok":true,"dur_ms":84}
+{"ts":"2026-04-07T17:24:15.045696-07:00","cmd":"log","session":"ses_739906","ok":true,"dur_ms":50}
+{"ts":"2026-04-07T17:24:15.135442-07:00","cmd":"review","session":"ses_739906","ok":true,"dur_ms":56}
+{"ts":"2026-04-07T17:24:18.153434-07:00","cmd":"start","session":"ses_739906","ok":true,"dur_ms":82}
+{"ts":"2026-04-07T17:24:44.247669-07:00","cmd":"log","session":"ses_739906","ok":true,"dur_ms":71}
+{"ts":"2026-04-07T17:24:44.360284-07:00","cmd":"review","session":"ses_739906","ok":true,"dur_ms":65}
+{"ts":"2026-04-07T17:24:47.767805-07:00","cmd":"start","session":"ses_739906","ok":true,"dur_ms":83}
+{"ts":"2026-04-07T17:25:28.416671-07:00","cmd":"log","session":"ses_739906","ok":true,"dur_ms":72}
+{"ts":"2026-04-07T17:25:28.532298-07:00","cmd":"review","session":"ses_739906","ok":true,"dur_ms":61}
+{"ts":"2026-04-07T17:25:31.680152-07:00","cmd":"start","session":"ses_739906","ok":true,"dur_ms":65}
+{"ts":"2026-04-07T17:26:06.002363-07:00","cmd":"log","session":"ses_739906","ok":true,"dur_ms":65}
+{"ts":"2026-04-07T17:26:06.105344-07:00","cmd":"review","session":"ses_739906","ok":true,"dur_ms":50}
+{"ts":"2026-04-07T17:29:18.129728-07:00","cmd":"usage","flags":{"new-session":"true"},"session":"ses_7cba29","ok":true,"dur_ms":62}
+{"ts":"2026-04-07T17:41:48.822551-07:00","cmd":"log","session":"ses_7cba29","ok":false,"dur_ms":112,"err":"no issue specified"}
+{"ts":"2026-04-07T17:42:03.761209-07:00","cmd":"log","session":"ses_7cba29","ok":true,"dur_ms":71}
+{"ts":"2026-04-07T17:45:16.302074-07:00","cmd":"usage","flags":{"new-session":"true"},"session":"ses_fe3ec6","ok":true,"dur_ms":58}
+{"ts":"2026-04-07T17:45:23.041962-07:00","cmd":"show","session":"ses_fe3ec6","ok":true,"dur_ms":3}
+{"ts":"2026-04-07T17:45:23.14483-07:00","cmd":"show","session":"ses_fe3ec6","ok":true,"dur_ms":2}
+{"ts":"2026-04-07T17:45:23.232768-07:00","cmd":"show","session":"ses_fe3ec6","ok":true,"dur_ms":2}
+{"ts":"2026-04-07T17:45:23.328958-07:00","cmd":"show","session":"ses_fe3ec6","ok":true,"dur_ms":1}
+{"ts":"2026-04-07T17:46:06.887366-07:00","cmd":"approve","flags":{"reason":"Structure matches hosting-plan.md spec exactly. assets/ omission is correct — no content exists for it yet."},"session":"ses_fe3ec6","ok":true,"dur_ms":72}
+{"ts":"2026-04-07T17:46:06.99947-07:00","cmd":"approve","flags":{"reason":"Valid, semantic, accessible HTML. Cleo-parchment palette and Atkinson Hyperlegible Next correctly applied. Designer polish pass is tasteful."},"session":"ses_fe3ec6","ok":true,"dur_ms":75}
+{"ts":"2026-04-07T17:46:07.117319-07:00","cmd":"approve","flags":{"reason":"File present at correct path. index.html naming enables clean URL per hosting-plan.md spec."},"session":"ses_fe3ec6","ok":true,"dur_ms":70}
+{"ts":"2026-04-07T17:46:07.225827-07:00","cmd":"approve","flags":{"reason":"Accurate, beginner-friendly guide. Matches hosting-plan.md recommendations throughout."},"session":"ses_fe3ec6","ok":true,"dur_ms":66}
+{"ts":"2026-04-07T18:08:30.29726-07:00","cmd":"create","flags":{"priority":"2"},"session":"ses_fe3ec6","ok":true,"dur_ms":93}
+{"ts":"2026-04-07T18:08:30.431974-07:00","cmd":"create","flags":{"priority":"2"},"session":"ses_fe3ec6","ok":true,"dur_ms":78}
+{"ts":"2026-04-07T18:11:50.36203-07:00","cmd":"create","flags":{"priority":"2"},"session":"ses_fe3ec6","ok":true,"dur_ms":87}
+{"ts":"2026-04-07T18:13:01.330803-07:00","cmd":"create","flags":{"priority":"2"},"session":"ses_fe3ec6","ok":true,"dur_ms":84}
+{"ts":"2026-04-07T18:13:01.455782-07:00","cmd":"create","flags":{"priority":"2"},"session":"ses_fe3ec6","ok":true,"dur_ms":70}
+{"ts":"2026-04-07T18:15:37.628294-07:00","cmd":"usage","flags":{"new-session":"true"},"session":"ses_ca2a21","ok":true,"dur_ms":61}

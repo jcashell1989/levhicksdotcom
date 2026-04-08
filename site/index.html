@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julian Hicks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #F5F0E8;
+      --fg:      #2B241B;
+      --muted:   #5A5347;
+      --green:   #3D6B3E;
+      --gold:    #7A6020;
+      --gold-hi: #B8922E;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Atkinson Hyperlegible Next', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Slight upward offset — content reads better above true center */
+      padding: 4rem 2rem 8rem;
+    }
+
+    main {
+      max-width: 380px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Accent rule: short, deliberate, left-anchored */
+    .rule {
+      width: 2rem;
+      height: 2px;
+      background: var(--green);
+      margin-bottom: 1.75rem;
+    }
+
+    .links {
+      display: flex;
+      gap: 0;
+      flex-direction: column;
+    }
+
+    .links a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 0.2rem 0;
+      /* Underline drawn from left on hover */
+      background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
+      background-size: 0% 1.5px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease, color 0.15s ease;
+    }
+
+    .links a + a {
+      margin-top: 0.5rem;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      color: var(--gold-hi);
+      background-size: 100% 1.5px;
+      outline: none;
+    }
+
+    .links a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Julian Hicks</h1>
+    <p class="tagline">Data scientist who reads too much and occasionally makes something about it.</p>
+    <div class="rule" role="presentation"></div>
+    <nav class="links" aria-label="Links">
+      <a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a>
+      <a href="https://github.com/jcashell1989">GitHub</a>
+      <a href="mailto:julian@levhicks.com">Email</a>
+    </nav>
+  </main>
+</body>
+</html>
