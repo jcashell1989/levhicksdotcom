@@ -247,14 +247,15 @@ pre {
 }
 
 /* ─── Dark mode ─────────────────────────────────────────────────── */
+/* Near-monochrome. Accents desaturate to cream so links read by weight
+   and underline, not chroma. Avoids the mid-century black+yellow trap. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:        #0B0B0B;
-    --fg:        #F5F0E8;
-    --muted:     #9C9A92;
-    --green:     #5E9460;
-    --gold:      #B8922E;
-    --gold-hi:   #D4B24A;
+    --bg:        #14110D;
+    --fg:        #E8E1D2;
+    --muted:     #8A8578;
+    --green:     #4F6B4F;
+    --gold:      #C9BE9E;
+    --gold-hi:   #F0E6C8;
   }
-
 }
