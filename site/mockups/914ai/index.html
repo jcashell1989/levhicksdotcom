@@ -928,6 +928,10 @@
       min-height: auto;       /* don't force 100vh — content dictates height */
       padding: 3rem 1.5rem;
     }
+    /* Clear the fixed preview badge on non-hero sections */
+    section:not(.hero) {
+      padding-top: 4rem;
+    }
     .hero {
       min-height: 100vh;
       min-height: 100dvh;     /* hero always fills the screen */
@@ -988,16 +992,18 @@
     .solution .big-idea { font-size: 1.25rem; }
     .catch-grid { grid-template-columns: 1fr; }
     .privacy-cards, .future-cards { grid-template-columns: 1fr; }
-    /* Tablet frame: fluid, restore aspect-ratio on mobile so screen fills frame */
+    /* Tablet frame: fluid, taller ratio on mobile so content fits without overflow */
     .tablet-frame {
       max-width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 3 / 2;
     }
     /* Screen must fill the frame height */
     .tablet-screen {
       height: 100%;
     }
-    .tablet-idle .clock .time { font-size: 3rem; }
+    .tablet-idle .clock .time { font-size: 2.5rem; }
+    .tablet-idle .clock .date { font-size: 0.9rem; }
+    .tablet-idle .footer-line { font-size: 0.75rem; }
     /* Phone frame: fluid, capped at original 280px */
     .phone-frame {
       width: 100%;
