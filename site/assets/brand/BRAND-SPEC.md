@@ -46,7 +46,7 @@ M 152 48 L 192 44 L 200 224 L 160 224 Z
 | `logo/logo-mark.svg` | Primary — ink on parchment background |
 | `logo/logo-mark-black.svg` | Black on transparent |
 | `logo/logo-mark-white.svg` | White on transparent |
-| `logo/logo-mark-bronze.svg` | Bronze (#8B4513) on transparent |
+| `logo/logo-mark-gold.svg` | Gold (#7A6020) on transparent |
 | `logo/favicon.svg` | Favicon source (64px render, 256 viewBox) |
 | `logo/logo-lockup-horizontal.svg` | Mark + "Julian Hicks" wordmark (Atkinson Hyperlegible Next) |
 
@@ -69,8 +69,8 @@ M 152 48 L 192 44 L 200 224 L 160 224 Z
 
 | Token | Light | Dark | Use |
 |-------|-------|------|-----|
-| bronze | `#8B4513` | `#C4813A` | Primary accent, links |
-| warm | `#A05A2C` | `#D4844A` | Hover states |
+| gold | `#7A6020` | `#B8922E` | Primary accent, links |
+| gold-hi | `#B8922E` | `#D4B24A` | Hover states |
 | slate | `#3A4A5A` | `#7A9AB4` | Secondary text, Chinese name |
 | sage | `#6B7D6D` | `#8FA88F` | Tertiary accent, tags |
 
@@ -149,7 +149,7 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
 | `export/logo-mark-black-512.png` | 512×512 | Print |
 | `export/logo-mark-white-256.png` | 256×256 | Dark backgrounds |
 | `export/logo-mark-white-512.png` | 512×512 | Dark backgrounds (print) |
-| `export/logo-mark-bronze-256.png` | 256×256 | Accent use |
+| `export/logo-mark-gold-256.png` | 256×256 | Accent use |
 
 ---
 
@@ -173,7 +173,7 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
     logo-mark.svg
     logo-mark-black.svg
     logo-mark-white.svg
-    logo-mark-bronze.svg
+    logo-mark-gold.svg
     favicon.svg
     logo-lockup-horizontal.svg
   /export
@@ -185,5 +185,5 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
     logo-mark-black-512.png
     logo-mark-white-256.png
     logo-mark-white-512.png
-    logo-mark-bronze-256.png
+    logo-mark-gold-256.png
 ```
