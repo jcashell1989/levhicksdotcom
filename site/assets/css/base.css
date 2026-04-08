@@ -99,8 +99,8 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem 8rem;
+  justify-content: flex-start;
+  padding: 4rem 2rem 8rem 10%;
 }
 
 main {
@@ -222,8 +222,8 @@ pre {
 /* Threshold mark — landing page only, above h1 */
 .site-mark {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 72px;
   margin-bottom: 1.5rem;
   animation: mark-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
