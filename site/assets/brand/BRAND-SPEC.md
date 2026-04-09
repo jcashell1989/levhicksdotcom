@@ -1,4 +1,4 @@
-# Threshold — Personal Brand Identity System
+# Catkin — Personal Brand Identity System
 
 ## Julian Hicks · levhicks.com
 
@@ -6,36 +6,23 @@
 
 ## 1. Concept
 
-Two asymmetric pillars separated by a deliberate gap. The logo is the space between — a threshold. Derived from Hermes Strophaios ("of the door-hinge"), the god of boundaries, translation, and movement between worlds.
+A hand-drawn birch branch — three leaves above, two catkins hanging below. Single-color ink line art, no fills, no shading. Vectorized from a pen-and-ink source drawing (`source/birch-branch.jpg`).
 
-The left pillar is heavier and taller with a 45° chamfer on its inner edge at ~40% height, creating a subtle doorway gesture. The right pillar is narrower with a slight outward lean (~5°), introducing directionality — something is about to move through.
+The choice is personal and intentionally not explained on the site. Treat it as a fixed visual identity, not a metaphor to extend: don't generate "threshold-of-spring" copy, don't lean on birch symbolism in writing, don't pair it with seasonal motifs. The mark stands on its own visual character.
 
 ---
 
 ## 2. Logo Geometry (Authoritative)
 
-All coordinates reference a 256×256 viewBox.
+The mark is a traced vector path, not a parametric construction — there is no authoritative coordinate table. The canonical source is `logo/logo-mark-black.svg` (viewBox `395 390 1262 1262`, square). All other variants are color swaps of the same path data.
 
-**Left pillar (with threshold notch):**
+Source bitmap: `source/birch-branch.jpg` (1024×1024). Re-trace pipeline:
 ```
-M 72 32 L 132 32 L 132 112 L 116 128 L 116 224 L 72 224 Z
+sips -s format bmp source/birch-branch.jpg --out src.bmp
+mkbitmap -f 4 -s 2 -t 0.48 src.bmp -o src.pbm
+potrace --svg --turdsize 16 --alphamax 1.2 --opttolerance 0.8 -u 10 src.pbm -o trace.svg
+# then crop viewBox to 395 390 1262 1262
 ```
-
-**Right pillar (outward lean):**
-```
-M 152 48 L 192 44 L 200 224 L 160 224 Z
-```
-
-| Property        | Value           |
-|-----------------|-----------------|
-| Left width      | 60 (top), 44 (below notch) |
-| Right width     | 40              |
-| Gap (top)       | 20              |
-| Gap (bottom)    | 44              |
-| Notch angle     | 45°             |
-| Notch depth     | 16              |
-| Notch position  | ~42% from top   |
-| Right lean      | ~5° outward     |
 
 ---
 
@@ -106,7 +93,7 @@ No serif display face. No monospace face (add only if a /code page ever needs on
 
 ## 6. Spacing
 
-Base unit derived from right pillar width: **10px** (40/256 × 64).
+Base unit: **10px**. Empirically the right step size for the Atkinson Hyperlegible Next body at the chosen measure — not derived from the mark. Don't rebase the grid to chase a relationship with the logo; consistency across the stylesheet is the value here.
 
 | Token | Value |
 |-------|-------|
@@ -130,11 +117,12 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
 
 ## 8. Motion
 
-- Gap subtly widens on reveal (scaleX 0.92 → 1)
-- Pillars stagger in (left first, right 100ms later)
+- Mark fades in on reveal (opacity 0 → 1, 600ms)
 - Easing: cubic-bezier(0.22, 1, 0.36, 1)
-- No bounce, no overshoot
-- Respect prefers-reduced-motion
+- No transform, no bounce, no overshoot
+- Respect prefers-reduced-motion (animation: none)
+
+The mark is a still ink drawing and is treated as such. No sway, no settle, no self-drawing wipe — those would all introduce a register the drawing doesn't actually carry. Fade in, get out of the way.
 
 ---
 
@@ -156,13 +144,13 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
 
 ## 10. Non-Negotiable Rules
 
-1. No outlines on the mark
+1. No outlines on the mark (it is itself line art — never stroke or outline the path)
 2. No gradients anywhere
 3. No centering everything — prefer left/edge alignment
 4. No rotating the mark
-5. No enclosing shapes (circles, squares, shields)
+5. No enclosing shapes (circles, squares, shields) around the mark
 6. No drop shadows
-7. The gap is sacred — never fill it, overlay it, or place text in it
+7. No re-coloring outside the four sanctioned variants (black / white / gold / parchment-bg primary)
 
 ---
 
@@ -170,6 +158,8 @@ Base unit derived from right pillar width: **10px** (40/256 × 64).
 
 ```
 /brand
+  /source
+    birch-branch.jpg          (untracked-from-render source bitmap)
   /logo
     logo-mark.svg
     logo-mark-black.svg

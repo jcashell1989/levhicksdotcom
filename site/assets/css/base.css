@@ -220,27 +220,19 @@ pre {
   font-size: 0.875em;
 }
 
-/* Threshold mark — landing page only, above h1 */
+/* Birch branch mark — landing page only, above h1 */
 .site-mark {
   display: block;
-  width: 48px;
+  width: 72px;
   height: 72px;
   margin-bottom: 1.5rem;
   animation: mark-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes mark-in {
-  from {
-    opacity: 0;
-    transform: scaleX(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-.site-mark { transform-origin: left center; }
 
 @media (prefers-reduced-motion: reduce) {
   .site-mark { animation: none; }
