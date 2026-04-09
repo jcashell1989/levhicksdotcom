@@ -14,13 +14,20 @@ Frontmatter schema (YAML between --- markers):
   pinned:    optional bool, pinned posts sort above everything else
   featured:  optional bool, reserved for future use
 
-Run from the repo root:  python3 build.py
+Usage:
+  python3 build.py                  # build the site
+  python3 build.py new "Title"      # scaffold a new draft post and open $EDITOR
+  python3 build.py new --help
 """
 from __future__ import annotations
 
+import argparse
+import os
 import re
+import shlex
 import subprocess
 import sys
+import unicodedata
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -173,5 +180,103 @@ def build() -> None:
     print(f"\n{len(published)} published, {drafts} draft(s)")
 
 
-if __name__ == "__main__":
+def slugify(title: str) -> str:
+    """Lowercase, ASCII-fold, drop apostrophes, hyphenate the rest.
+
+    "Why I'm Tired of Frontmatter" -> "why-im-tired-of-frontmatter"
+    "Café Noir"                    -> "cafe-noir"
+    """
+    # NFKD decomposes accented chars; encode/decode through ascii drops them.
+    folded = unicodedata.normalize("NFKD", title).encode("ascii", "ignore").decode()
+    # Strip apostrophes BEFORE the alnum filter so "i'm" -> "im", not "i-m".
+    no_apos = re.sub(r"['\u2019]", "", folded.lower())
+    hyphenated = re.sub(r"[^a-z0-9]+", "-", no_apos)
+    return hyphenated.strip("-")
+
+
+def scaffold_post(title: str, slug: str | None, no_edit: bool) -> Path:
+    """Create a draft post and (unless --no-edit) hand off to $EDITOR.
+
+    Returns the path to the new file. Refuses to overwrite an existing file.
+    Uses execvp on the editor so this process is replaced — no python wrapper
+    sitting on top of the editor session.
+    """
+    final_slug = slug if slug else slugify(title)
+    if not final_slug:
+        print(
+            f"error: title {title!r} produced an empty slug; pass --slug",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+
+    CONTENT_DIR.mkdir(parents=True, exist_ok=True)
+    path = CONTENT_DIR / f"{final_slug}.md"
+    if path.exists():
+        print(f"error: {path.relative_to(ROOT)} already exists", file=sys.stderr)
+        sys.exit(1)
+
+    today = date.today().isoformat()
+    # Escape any double-quotes in the title for the YAML scalar.
+    yaml_title = title.replace('"', '\\"')
+    body = (
+        "---\n"
+        f'title: "{yaml_title}"\n'
+        f"date: {today}\n"
+        'excerpt: ""\n'
+        "draft: true\n"
+        f"# slug: {final_slug}   # uncomment + edit to change the URL later\n"
+        "---\n"
+        "\n"
+    )
+    path.write_text(body)
+    print(f"created {path.relative_to(ROOT)}")
+
+    if no_edit:
+        return path
+
+    editor_cmd = os.environ.get("VISUAL") or os.environ.get("EDITOR") or "vi"
+    parts = shlex.split(editor_cmd)
+    try:
+        os.execvp(parts[0], parts + [str(path)])
+    except FileNotFoundError:
+        print(
+            f"error: editor {parts[0]!r} not found on PATH; file is at {path}",
+            file=sys.stderr,
+        )
+        sys.exit(127)
+
+
+def cmd_new(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(
+        prog="build.py new",
+        description="Scaffold a new draft post under content/writing/.",
+    )
+    parser.add_argument(
+        "title", help="Post title (will be the value of frontmatter `title:`)"
+    )
+    parser.add_argument(
+        "--slug",
+        help="Override the auto-derived slug (lowercase-hyphens only)",
+    )
+    parser.add_argument(
+        "--no-edit",
+        action="store_true",
+        help="Create the file and print its path; do not open $EDITOR",
+    )
+    args = parser.parse_args(argv)
+    scaffold_post(args.title, args.slug, args.no_edit)
+    return 0
+
+
+def main(argv: list[str]) -> int:
+    if len(argv) >= 1 and argv[0] == "new":
+        return cmd_new(argv[1:])
+    if argv and argv[0] in ("-h", "--help"):
+        print(__doc__)
+        return 0
     build()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
