@@ -14,7 +14,7 @@ newpost "Why I'm Tired of Frontmatter"
 
 This creates `content/writing/why-im-tired-of-frontmatter.md` with the
 frontmatter pre-filled (`draft: true` by default), then drops you into
-`$EDITOR` on the file. Skip to step 3 (write the body) — steps 1 and 2 are
+`$EDITOR` on the file. Skip to step 3 (write the body) - steps 1 and 2 are
 already done for you.
 
 The rest of this guide is the manual path, useful when you don't have the
@@ -64,7 +64,7 @@ Standard markdown, rendered through pandoc. What works:
 - Paragraphs, bold, italic
 - Lists (ordered + unordered)
 - Links and inline code
-- Code blocks (```) — rendered in Maple Mono
+- Code blocks (```) - rendered in Maple Mono
 - Blockquotes (green left border)
 
 ## 4. Build
@@ -109,7 +109,7 @@ push alone will do it.)
 
 ## Notes
 
-- This file lives at `content/WRITING-GUIDE.md` on purpose — `build.py`
+- This file lives at `content/WRITING-GUIDE.md` on purpose - `build.py`
   only reads `content/writing/*.md`, so this guide stays out of the
   built site but is still in the repo.
 - If you ever need to also exclude files from inside `content/writing/`

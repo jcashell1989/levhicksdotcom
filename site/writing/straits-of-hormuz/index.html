@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Straits of Hormuz — Julian Hicks</title>
+  <meta name="description" content="">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/brand/export/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/brand/export/apple-touch-icon.png">
+  <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Straits of Hormuz — Julian Hicks">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="https://julian.levhicks.com/assets/brand/export/logo-512.png">
+  <meta property="og:url" content="https://julian.levhicks.com/writing/straits-of-hormuz/">
+  <meta property="article:published_time" content="2026-04-09">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    /* Post pages read top-aligned and slightly larger than the rest of the site */
+    body {
+      align-items: flex-start;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+
+    header.post-header { margin-bottom: 2.5rem; }
+
+    header.post-header time {
+      display: block;
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 0.4rem;
+    }
+
+    header.post-header h1 {
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    header.post-header .rule { margin-bottom: 0; }
+
+    article.prose h2 {
+      font-family: var(--font-sans);
+      font-size: 1.375rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-top: 2.25rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    article.prose h3 {
+      font-family: var(--font-sans);
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    article.prose p { margin-bottom: 1.1rem; }
+
+    article.prose ul,
+    article.prose ol { margin: 0 0 1.25rem 1.25rem; }
+
+    article.prose li { margin-bottom: 0.4rem; }
+
+    article.prose a {
+      color: var(--gold);
+      text-decoration: none;
+      background-image: linear-gradient(var(--gold), var(--gold));
+      background-size: 100% 1.5px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: color 0.15s ease;
+    }
+
+    article.prose a:hover,
+    article.prose a:focus-visible { color: var(--gold-hi); outline: none; }
+
+    article.prose a:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 1px;
+    }
+
+    article.prose blockquote {
+      border-left: 2px solid var(--green);
+      padding-left: 1rem;
+      margin: 1.25rem 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    article.prose code {
+      background: rgba(43, 36, 27, 0.06);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+
+    article.prose pre {
+      background: rgba(43, 36, 27, 0.06);
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    article.prose pre code { background: none; padding: 0; }
+    article.prose strong { font-weight: 700; }
+    article.prose em { font-style: italic; }
+
+    article.prose figure {
+      margin: 2rem auto;
+      max-width: 100%;
+    }
+    article.prose figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+    }
+    article.prose figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    article.prose blockquote {
+      margin: 1.5rem 0;
+      padding: 0.25rem 0 0.25rem 1rem;
+      border-left: 3px solid var(--green);
+      color: var(--muted);
+      font-style: italic;
+    }
+    article.prose blockquote p { margin-bottom: 0.5rem; }
+    article.prose blockquote p:last-child { margin-bottom: 0; }
+
+    .post-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(43, 36, 27, 0.1);
+    }
+
+    .post-footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      background-image: linear-gradient(var(--muted), var(--muted));
+      background-size: 0% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease;
+    }
+
+    .post-footer a:hover,
+    .post-footer a:focus-visible { background-size: 100% 1px; outline: none; }
+
+    @media (prefers-color-scheme: dark) {
+      article.prose code,
+      article.prose pre {
+        background: rgba(245, 240, 232, 0.07);
+      }
+      .post-footer {
+        border-top-color: rgba(245, 240, 232, 0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Back to writing">
+      <a class="back-link" href="/writing/">&#8592; Writing</a>
+    </nav>
+    <header class="post-header">
+      <time datetime="2026-04-09">Apr 9, 2026</time>
+      <h1 class="display">Straits of Hormuz</h1>
+      <div class="rule" role="presentation"></div>
+    </header>
+    <article class="prose">
+<h1 id="speedrunning-the-straits-of-hormuz">Speedrunning the Straits of
+Hormuz</h1>
+<p>I’ve been feeling pretty bent out of shape this week for, well,
+<em>obvious reasons</em>. When the current cretin in the White House is
+<a
+href="https://www.reuters.com/world/middle-east/trumps-threat-iran-shocks-global-leaders-unnerves-some-republicans-2026-04-07/">threatening
+to eradicate</a> one of this planet’s oldest civilizations because he
+isn’t getting what he wants, it has a way of… focusing you, shall we
+say, on concerns you didn’t think you’d worry about.</p>
+<blockquote>
+<p>Aside: I really shouldn’t call Trump a cretin, that’s a specific
+disorder that is caused by a <a
+href="https://youtu.be/XRcwwZXJ8gk?si=nJi6-Kpgl76usy-R">lack of iodine
+during fetal development</a>. Also, cretinism might make a comeback
+because people think it tastes bad! Which it doesn’t! Fun!!!</p>
+</blockquote>
+<p>For example:</p>
+<ul>
+<li>My mother asked if there was an app that would let us communicate if
+the internet went out across LA, you know, <em>just in case</em>.</li>
+<li>My aunts called asking if they should take all their cash out of the
+bank <em>just in case</em>.</li>
+<li>I asked my husband if we should really be going to my sister in
+law’s wedding in Alexandria, again, <em>just in case</em>.</li>
+</ul>
+<p>(I’m writing this on the plane there, btw, so I’m not freaking out.
+Not anymore, at least)</p>
+<blockquote>
+<p>Btw, notice how no one complains about the <a
+href="https://giggitee.com/products/gay-of-hormuz-t-shirt"><em>GAYS</em>
+of Hormuz?</a> That’s because they’re <strong>always</strong> open!
+Also, Trump deported them so Iran could execute them.</p>
+</blockquote>
+<p>Life isn’t guaranteed; anything could happen at any moment. It’s just
+not likely to. <a
+href="https://en.wikipedia.org/wiki/Culture_series">The Culture</a>
+isn’t going to send Special Circumstances to take out the global cabal
+of pedophiles that run most of the world. I’m not going to lose 50 lbs
+tomorrow (short of cutting off a major body part). And the Straits of
+Hormuz aren’t going to reopen to free traffic any time soon.</p>
+<p>I’m pretty pissed at the US Navy, btw. This has to be the most
+evitable-yet-foreseeable conflict ever to happen, and two decades of
+procurement and planning failures mean that we have zero capability to
+regain control of the Straits. The signs have been clear:</p>
+<ul>
+<li><a
+href="https://www.navytimes.com/news/your-navy/2026/03/12/the-us-navy-decommissioned-middle-east-minesweepers-last-year-heres-what-they-did/">US
+mine warfare vessels are horrifically out of date, and have been for
+years</a></li>
+<li><a
+href="https://www.propublica.org/article/how-navy-spent-billions-littoral-combat-ship">We’re
+replacing them with one of the worst procurement boondoggles ever to
+happen</a></li>
+<li><a
+href="https://www.naval-technology.com/news/us-navy-ffx-vs-constellation-frigate-a-comparison/">Rather
+than build a sensible, right-sized escort, the Navy decided it wanted an
+Arleigh-Burke-lite, leading to a cancellation of the program in favor of
+a ship with zero VLS capability</a></li>
+<li>And all of this at the cost of billions and billions of dollars, and
+time we don’t have!</li>
+</ul>
+<p>One is put in the mind of the <a
+href="https://winstonchurchill.hillsdale.edu/americans-will-always-right-thing/">Churchill
+quote</a> about Americans and doing the right thing - except clearly all
+the other options haven’t been exhausted yet. It’s a particular
+blindspot of our country: safe inside our hoarders’ bedroom of the
+western hemisphere, bundled up in the comforting blanket of the Atlantic
+and blanketing comforter of the Pacific, we are free to dispatch
+missiles, ships, and aircraft - like a dashed-off rage-bait tweet - to
+exercise our will on the world and think that no one will touch us,
+while we watch the chaos erupt. Is it uniquely American hubris or
+all-too-human blindness?</p>
+<figure>
+<img src="/assets/writing/straits-of-hormuz/trump-procrastination.jpg"
+alt="Trump, probably. Also me, most days." />
+<figcaption aria-hidden="true">Trump, probably. Also me, most
+days.</figcaption>
+</figure>
+<p>I don’t know. I like to think it’s human - that the inevitable sense
+of doom barreling toward us at breakneck speed means we hide and hope
+it’ll go by us like <a
+href="https://www.goodreads.com/quotes/1398-i-love-deadlines-i-love-the-whooshing-noise-they-make">deadlines
+did to Douglas Adams</a>. It would certainly excuse some of my own
+procrastinatory behavior, like putting off checking to see if my
+15-year-old suit will fit for this wedding I’m heading to, or spending
+most of last year pretending that LLMs weren’t coming for my job.
+(another aside: I have a lot of complicated feelings about LLMs and
+so-called AI that I will unpack in a future post.) And it would explain
+a lot of the way we behave w/r/t climate change and anthropogenic
+extinction.</p>
+<p>I’m very close to entering middle age now - I’m 36, my bald spot is
+expanding, my gut is stubbornly refusing to shrink despite the wonders
+of modern medicine - and quite disappointed that my personal tendency
+towards ostrichmode hasn’t gone away with age and experience. Things
+keep appearing on the horizon, I keep getting scared, I ignore them and
+they either work out or not. The human race at-large, America, and I all
+keep letting ourselves get into situations of our own making and
+marching, lockstep, towards a state of (questionable?) ruin.</p>
+<p>I’d like to think that I, personally, wouldn’t do something that
+causes the death, ruin and destruction of pointless wars or climate
+change, but frankly, I’ve played enough <a
+href="https://en.wikipedia.org/wiki/Civilization_%28series%29">Civ</a>,
+<a href="https://en.wikipedia.org/wiki/Hearts_of_Iron_IV">Hoi4</a> and
+<a href="https://vic3.paradoxwikis.com/Victoria_3_Wiki">Vicky 3</a> to
+know that my decisions could lead to the death of millions. (Sometimes
+they also lead to <a
+href="https://en.wiktionary.org/wiki/Fully_Automated_Luxury_Gay_Space_Communism">FALGSC</a>
+too, but I’m not so perfect that I can make it happen consistently, even
+in a video game.)</p>
+<h2 id="things-i-watched-this-week">Things I Watched This Week</h2>
+<ul>
+<li>I need to write up my thoughts on this, but Tom Nichols’ <a
+href="https://youtu.be/lNLXUMK2hBg?si=0ClytEKjmNMFUrg3">video</a> on the
+world’s reaction to Trump’s threats made me think a lot about how we all
+need to stop letting dotards run the world’s major powers</li>
+<li>I want to recommend <a
+href="https://www.youtube.com/@AtunSheiFilms">Atun-Shei Films’</a> old
+but <em>excellent</em> “CHECKMATE LINCOLNITES!” series, which I spent
+too much time watching all week. I had no idea how it would end, but a
+battle between a Nazi necromancer and the Witchfinder General of
+Massachusetts Bay was not on my list.</li>
+<li>I’m doing my best to temper my media diet with both AI-boosters and
+skeptics, and these <a
+href="https://youtu.be/aFcVKzfkJPk?si=CXOdQlJWQ3Giv1Lf">two</a> <a
+href="https://youtu.be/mcN1VTTIjQs?si=vUfQc3kKcOTYVe_9">videos</a> on <a
+href="https://red.anthropic.com/2026/mythos-preview/">Claude Mythos</a>
+were pretty interesting takes on a model none of us have seen yet.</li>
+</ul>
+<h2 id="housekeeping">Housekeeping</h2>
+<p>Finally, in the spirit of avoiding procratination and achieving
+<strong>pErSoNaL gRoWtH</strong>, I’ll be trying to write at least
+something every week. Stay tuned, you can watch a crazy [fella] <a
+href="https://www.youtube.com/watch?v=PrRDrz53Q1E">fall apart in front
+of you!</a></p>
+<p>Much love, Julian</p>
+    </article>
+    <footer class="post-footer">
+      <a href="/writing/">&#8592; All writing</a>
+    </footer>
+  </main>
+</body>
+</html>
