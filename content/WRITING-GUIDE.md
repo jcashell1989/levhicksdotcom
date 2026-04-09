@@ -2,6 +2,24 @@
 
 How to add a post to the writing section of levhicks.com.
 
+## Quick start
+
+If you have the `newpost` shell function configured (zsh and fish wrappers
+ship in `~/.zshrc` and `~/.config/fish/functions/newpost.fish`), the fastest
+path is:
+
+```
+newpost "Why I'm Tired of Frontmatter"
+```
+
+This creates `content/writing/why-im-tired-of-frontmatter.md` with the
+frontmatter pre-filled (`draft: true` by default), then drops you into
+`$EDITOR` on the file. Skip to step 3 (write the body) — steps 1 and 2 are
+already done for you.
+
+The rest of this guide is the manual path, useful when you don't have the
+alias or when you want to understand what `newpost` is doing.
+
 ## 1. Create the file
 
 Drop a markdown file into `content/writing/`. The filename stem becomes
