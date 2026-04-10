@@ -1,12 +1,10 @@
 ---
 title: "Straits of Hormuz"
 date: 2026-04-09
-excerpt: ""
+excerpt: "I've been feeling pretty bent out of shape this week."
 draft: false
 
 ---
-
-# Speedrunning the Straits of Hormuz
 
 I've been feeling pretty bent out of shape this week for, well, *obvious reasons*. When the current cretin in the White House is [threatening to eradicate](https://www.reuters.com/world/middle-east/trumps-threat-iran-shocks-global-leaders-unnerves-some-republicans-2026-04-07/) one of this planet's oldest civilizations because he isn't getting what he wants, it has a way of... focusing you, shall we say, on concerns you didn't think you'd worry about.
 
