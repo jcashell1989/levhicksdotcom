@@ -33,11 +33,14 @@ from datetime import date
 from pathlib import Path
 
 import yaml
+from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).parent
 CONTENT_DIR = ROOT / "content" / "writing"
 TEMPLATES_DIR = ROOT / "templates"
 OUTPUT_DIR = ROOT / "site" / "writing"
+SITE_DIR = ROOT / "site"
+SITE_URL = "https://julian.levhicks.com"
 
 FRONTMATTER_RE = re.compile(r"\A---\n(.*?)\n---\n(.*)\Z", re.DOTALL)
 
@@ -114,6 +117,68 @@ def fmt_month_year(d: date) -> str:
     return d.strftime("%b %-d, %Y")
 
 
+def build_atom_feed(published: list[Post]) -> None:
+    """Write an Atom feed of published posts to site/atom.xml."""
+    if not published:
+        return
+
+    updated = published[0].date.isoformat() + "T00:00:00Z"
+    entries = []
+    for p in published:
+        url = f"{SITE_URL}/writing/{p.slug}/"
+        entry_xml = (
+            "  <entry>\n"
+            f"    <title>{xml_escape(p.title)}</title>\n"
+            f'    <link href="{url}" rel="alternate"/>\n'
+            f"    <id>{url}</id>\n"
+            f"    <updated>{p.date.isoformat()}T00:00:00Z</updated>\n"
+            f"    <summary>{xml_escape(p.excerpt)}</summary>\n"
+            f'    <content type="html">{xml_escape(p.body_html)}</content>\n'
+            "  </entry>"
+        )
+        entries.append(entry_xml)
+
+    feed = (
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<feed xmlns="http://www.w3.org/2005/Atom">\n'
+        f"  <title>Julian Hicks - Writing</title>\n"
+        f'  <link href="{SITE_URL}/atom.xml" rel="self"/>\n'
+        f'  <link href="{SITE_URL}/writing/" rel="alternate"/>\n'
+        f"  <id>{SITE_URL}/writing/</id>\n"
+        f"  <updated>{updated}</updated>\n"
+        f"  <author><name>Julian Hicks</name></author>\n" + "\n".join(entries) + "\n"
+        "</feed>\n"
+    )
+    (SITE_DIR / "atom.xml").write_text(feed)
+    print("  built site/atom.xml")
+
+
+def build_sitemap(published: list[Post]) -> None:
+    """Write a sitemap.xml listing all public pages."""
+    urls = [
+        (f"{SITE_URL}/", None),
+        (f"{SITE_URL}/writing/", published[0].date if published else None),
+    ]
+    for p in published:
+        urls.append((f"{SITE_URL}/writing/{p.slug}/", p.date))
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for url, lastmod in urls:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{url}</loc>")
+        if lastmod:
+            lines.append(f"    <lastmod>{lastmod.isoformat()}</lastmod>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+    lines.append("")
+
+    (SITE_DIR / "sitemap.xml").write_text("\n".join(lines))
+    print("  built site/sitemap.xml")
+
+
 def build() -> None:
     if not CONTENT_DIR.exists():
         print(f"error: {CONTENT_DIR} does not exist", file=sys.stderr)
@@ -175,6 +240,12 @@ def build() -> None:
     index_html = render(index_template, {"ENTRIES": entries_html})
     (OUTPUT_DIR / "index.html").write_text(index_html)
     print(f"  built site/writing/index.html")
+
+    # Generate Atom feed (published posts only, newest first)
+    build_atom_feed(published)
+
+    # Generate sitemap
+    build_sitemap(published)
 
     drafts = len(posts) - len(published)
     print(f"\n{len(published)} published, {drafts} draft(s)")
