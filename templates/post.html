@@ -30,19 +30,20 @@
 
     header.post-header { margin-bottom: 2.5rem; }
 
-    header.post-header time {
-      display: block;
-      color: var(--muted);
-      font-size: 0.875rem;
-      margin-bottom: 0.4rem;
-    }
-
     header.post-header h1 {
       line-height: 1.15;
-      margin-bottom: 1rem;
+      margin-bottom: 0;
     }
 
-    header.post-header .rule { margin-bottom: 0; }
+    header.post-header .rule { margin-bottom: 1.25rem; }
+
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      margin-bottom: 2.5rem;
+    }
 
     article.prose h2 {
       font-family: var(--font-sans);
@@ -170,19 +171,23 @@
 </head>
 <body>
   <main>
-    <nav aria-label="Back to writing">
-      <a class="back-link" href="/writing/">&#8592; Writing</a>
+    <nav class="page-chrome" aria-label="Page navigation">
+      <a href="/" class="header-mark" aria-label="home"><picture><source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo/logo-mark-black.svg" alt="" width="28" height="28"></picture></a>
+      <a class="back-link" href="/writing/">&#8592; field notes</a>
     </nav>
     <header class="post-header">
-      <time datetime="{{DATE_ISO}}">{{DATE_HUMAN}}</time>
-      <h1 class="display">{{TITLE}}</h1>
       <div class="rule" role="presentation"></div>
+      <h1 class="display">{{TITLE}}</h1>
+      <div class="post-meta"><time datetime="{{DATE_ISO}}">{{DATE_HUMAN}}</time></div>
     </header>
     <article class="prose">
 {{BODY}}
     </article>
     <footer class="post-footer">
       <a href="/writing/">&#8592; All writing</a>
+    </footer>
+    <footer class="site-footer">
+      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
     </footer>
   </main>
 </body>

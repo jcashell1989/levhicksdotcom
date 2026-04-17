@@ -21,37 +21,40 @@
   <style>
     main { max-width: 520px; }
     .entry-list { list-style: none; }
-    .entry { margin-bottom: 2rem; }
+    .entry {
+      padding: 0.75rem 0;
+      border-top: 1px solid rgba(43, 36, 27, 0.08);
+    }
 
     .entry time {
       display: block;
+      font-family: var(--font-mono);
       color: var(--muted);
-      font-size: 0.875rem;
-      margin-bottom: 0.2rem;
+      font-size: 0.75rem;
+      margin-bottom: 4px;
     }
 
     .entry h2 {
-      font-size: 1.25rem;
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
       font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 4px;
     }
 
     .entry h2 a {
-      color: var(--gold);
-      text-decoration: none;
-      display: inline-block;
-      background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
-      background-size: 0% 1.5px;
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      transition: background-size 0.2s ease, color 0.15s ease;
+      color: var(--fg);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(43, 36, 27, 0.15);
+      transition: text-decoration-color 400ms ease;
     }
 
     .entry h2 a:hover,
     .entry h2 a:focus-visible {
-      color: var(--gold-hi);
-      background-size: 100% 1.5px;
+      text-decoration-color: var(--gold);
       outline: none;
     }
 
@@ -63,19 +66,28 @@
 
     .excerpt { color: var(--muted); font-size: 0.9375rem; }
     .empty { color: var(--muted); font-style: italic; }
+
+    @media (prefers-color-scheme: dark) {
+      .entry { border-top-color: rgba(232, 225, 210, 0.08); }
+      .entry h2 a { text-decoration-color: rgba(232, 225, 210, 0.15); }
+    }
   </style>
 </head>
 <body>
   <main>
-    <nav aria-label="Back to home">
-      <a class="back-link" href="/">&#8592; Home</a>
+    <nav class="page-chrome" aria-label="Page navigation">
+      <a href="/" class="header-mark" aria-label="home"><picture><source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo/logo-mark-black.svg" alt="" width="28" height="28"></picture></a>
+      <a class="back-link" href="/">&#8592; home</a>
     </nav>
+    <div class="rule" role="presentation"></div>
     <h1>Writing</h1>
     <p class="tagline">Essays, notes, and whatever else I finish.</p>
-    <div class="rule" role="presentation"></div>
     <ul class="entry-list">
 {{ENTRIES}}
     </ul>
+    <footer class="site-footer">
+      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
+    </footer>
   </main>
 </body>
 </html>

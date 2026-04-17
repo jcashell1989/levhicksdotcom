@@ -25,15 +25,40 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
+      gap: 3.5rem;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 1.25rem;
+      align-items: start;
+    }
+
+    .project .image-frame {
+      grid-row: 1 / span 3;
+    }
+
+    @media (max-width: 520px) {
+      .project {
+        grid-template-columns: 1fr;
+      }
     }
 
     .project h2 {
+      font-family: var(--font-serif);
       font-size: 1.25rem;
       font-weight: 700;
       color: var(--fg);
       letter-spacing: 0;
       margin-bottom: 0.25rem;
+    }
+
+    .project .year {
+      font-family: var(--font-mono);
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-bottom: 0.4rem;
     }
 
     .project .meta {
@@ -46,7 +71,43 @@
     .project .desc {
       font-size: 0.9375rem;
       color: var(--fg);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project .status {
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-style: italic;
+      margin-bottom: 0.9rem;
+    }
+
+    /* Showcase image frame — square, image fills */
+    .image-frame {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .image-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Placeholder — faintly tinted square reads as intentional empty state */
+    .image-frame.placeholder {
+      border-radius: 0;
+      background: color-mix(in srgb, var(--muted) 8%, transparent);
+    }
+
+    .image-frame.placeholder svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: color-mix(in srgb, var(--muted) 35%, transparent);
     }
 
     /* Row-laid-out gold links for per-project view/source */
@@ -87,13 +148,50 @@
 </head>
 <body>
   <main>
-    <nav aria-label="Back to home">
-      <a class="back-link" href="/">&#8592; Home</a>
+    <nav class="page-chrome" aria-label="Page navigation">
+      <a href="/" class="header-mark" aria-label="home"><picture><source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo/logo-mark-black.svg" alt="" width="28" height="28"></picture></a>
+      <a class="back-link" href="/">&#8592; home</a>
     </nav>
+    <div class="rule" role="presentation"></div>
     <h1>Projects</h1>
     <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
-    <div class="rule" role="presentation"></div>
-    <p class="empty">Nothing here yet.</p>
+    <ul class="project-list">
+      <li class="project">
+        <div class="image-frame">
+          <img src="/assets/projects/enodios.jpg" alt="Enodios logo" loading="lazy">
+        </div>
+        <h2>Enodios</h2>
+        <p class="desc">
+          A personal AI agent stack that keeps work, personal, and smart-home
+          contexts in separate silos — coordinating over a small home cluster
+          so no single agent ever sees more than it should. Remembers what past
+          runs did, audits tool calls before they fire, and tracks cost as it goes.
+        </p>
+        <p class="status">unreleased, project still in development</p>
+      </li>
+
+      <li class="project">
+        <div class="image-frame placeholder">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Flightdeck screenshot placeholder">
+            <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+          </svg>
+        </div>
+        <h2>Flightdeck</h2>
+        <p class="desc">
+          A mission-control dashboard for running multiple AI coding agents in
+          parallel across many repos — one glanceable view of every session on
+          your machine, grouped by project and agent, so nothing gets lost
+          between terminal tabs. Dispatches new work directly, and picks up
+          sessions started elsewhere without needing a wrapper.
+        </p>
+        <p class="status">unreleased, project still in development</p>
+      </li>
+    </ul>
+    <footer class="site-footer">
+      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
+    </footer>
   </main>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Writing — Julian Hicks</title>
-  <meta name="description" content="Essays, notes, and whatever else Julian Hicks finishes writing.">
+  <title>About — Julian Hicks</title>
+  <meta name="description" content="Data scientist in Los Angeles. This is where I put things that don't belong anywhere else.">
   <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/brand/export/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
@@ -12,64 +12,48 @@
   <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Writing — Julian Hicks">
-  <meta property="og:description" content="Essays, notes, and whatever else Julian Hicks finishes writing.">
+  <meta property="og:title" content="About — Julian Hicks">
+  <meta property="og:description" content="Data scientist in Los Angeles. This is where I put things that don't belong anywhere else.">
   <meta property="og:image" content="https://julian.levhicks.com/assets/brand/export/logo-512.png">
-  <meta property="og:url" content="https://julian.levhicks.com/writing/">
+  <meta property="og:url" content="https://julian.levhicks.com/about/">
   <link rel="alternate" type="application/atom+xml" title="Julian Hicks - Writing" href="/atom.xml">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
     main { max-width: 520px; }
-    .entry-list { list-style: none; }
-    .entry {
-      padding: 0.75rem 0;
-      border-top: 1px solid rgba(43, 36, 27, 0.08);
-    }
 
-    .entry time {
-      display: block;
-      font-family: var(--font-mono);
-      color: var(--muted);
-      font-size: 0.75rem;
-      margin-bottom: 4px;
-    }
-
-    .entry h2 {
-      font-family: var(--font-serif);
-      font-size: 1.375rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-
-    .entry h2 a {
+    .about-body p {
       color: var(--fg);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+    }
+
+    .about-body a {
+      color: var(--gold);
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
-      text-decoration-color: rgba(43, 36, 27, 0.15);
-      transition: text-decoration-color 400ms ease;
+      text-decoration-color: rgba(43, 36, 27, 0.30);
+      transition: color 400ms ease, text-decoration-color 400ms ease;
     }
 
-    .entry h2 a:hover,
-    .entry h2 a:focus-visible {
-      text-decoration-color: var(--gold);
+    .about-body a:hover,
+    .about-body a:focus-visible {
+      color: var(--gold-hi);
+      text-decoration-color: var(--gold-hi);
       outline: none;
     }
 
-    .entry h2 a:focus-visible {
+    .about-body a:focus-visible {
       outline: 2px solid var(--green);
       outline-offset: 3px;
       border-radius: 1px;
     }
 
-    .excerpt { color: var(--muted); font-size: 0.9375rem; }
-    .empty { color: var(--muted); font-style: italic; }
-
     @media (prefers-color-scheme: dark) {
-      .entry { border-top-color: rgba(232, 225, 210, 0.08); }
-      .entry h2 a { text-decoration-color: rgba(232, 225, 210, 0.15); }
+      .about-body a {
+        text-decoration-color: rgba(232, 225, 210, 0.20);
+      }
     }
   </style>
 </head>
@@ -80,16 +64,12 @@
       <a class="back-link" href="/">&#8592; home</a>
     </nav>
     <div class="rule" role="presentation"></div>
-    <h1>Writing</h1>
-    <p class="tagline">Essays, notes, and whatever else I finish.</p>
-    <ul class="entry-list">
-      <li><article class="entry">
-        <time datetime="2026-04-09">Apr 9, 2026</time>
-        <h2><a href="/writing/straits-of-hormuz/">Straits of Hormuz</a></h2>
-        <p class="excerpt">I've been feeling pretty bent out of shape this week.</p>
-      </article></li>
-
-    </ul>
+    <h1>About</h1>
+    <div class="about-body">
+      <p>Data Scientist, raised and living in Los Angeles. I work for Bird (the scooters) and I focus mostly on supply & demand balancing. </p>
+      <p>A lot of things catch my interest, and I try to keep that interest harnessed appropriately.</p>
+      <p>The best way to reach me is <a href="mailto:julian@levhicks.com">email</a>. I answer when I can.</p>
+    </div>
     <footer class="site-footer">
       &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
     </footer>

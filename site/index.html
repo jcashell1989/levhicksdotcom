@@ -20,6 +20,16 @@
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
     main { max-width: 380px; }
+    .links hr {
+      border: none;
+      border-top: 1px solid rgba(43, 36, 27, 0.10);
+      margin: 0.75rem 0;
+      width: 2rem;
+      align-self: flex-start;
+    }
+    @media (prefers-color-scheme: dark) {
+      .links hr { border-top-color: rgba(232, 225, 210, 0.10); }
+    }
   </style>
 </head>
 <body>
@@ -28,16 +38,21 @@
       <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
       <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" aria-hidden="true" width="72" height="72">
     </picture>
-    <h1>Julian Hicks</h1>
-    <p class="tagline">Data scientist & compulsive tinkerer. <br> Cities, models, and the occasional apocalypse.</p>
+    <h1 class="display">Julian Hicks</h1>
+    <p class="tagline">Data scientist &amp; compulsive tinkerer. <br> Cities, models, and the occasional apocalypse.</p>
     <div class="rule" role="presentation"></div>
     <nav class="links" aria-label="Links">
       <a href="/writing/">Writing</a>
       <a href="/projects/">Projects</a>
+      <a href="/about/">about</a>
+      <hr role="separator">
       <a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a>
       <a href="https://github.com/jcashell1989">GitHub</a>
       <a href="mailto:julian@levhicks.com">Email</a>
     </nav>
+    <footer class="site-footer">
+      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
+    </footer>
   </main>
 </body>
 </html>
