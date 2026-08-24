@@ -102,6 +102,18 @@
       object-fit: cover;
     }
 
+    /* Engraving plates keep their natural aspect ratio instead of being
+       cropped into the square frame (which clipped tall artwork) */
+    .image-frame.plate {
+      aspect-ratio: auto;
+      width: 120px;
+    }
+
+    .image-frame.plate img {
+      height: auto;
+      object-fit: contain;
+    }
+
     /* Placeholder — faintly tinted square reads as intentional empty state */
     .image-frame.placeholder {
       border-radius: 0;
@@ -162,7 +174,7 @@
     <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
     <ul class="project-list">
       <li class="project">
-        <div class="image-frame">
+        <div class="image-frame plate">
           <picture>
             <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
             <img src="/assets/projects/asknum-eval-light.svg" alt="asknum-eval mark — hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
@@ -180,7 +192,7 @@
       </li>
 
       <li class="project">
-        <div class="image-frame">
+        <div class="image-frame plate">
           <picture>
             <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
             <img src="/assets/projects/corylus-light.svg" alt="Corylus mark — woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
