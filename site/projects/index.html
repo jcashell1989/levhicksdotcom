@@ -158,16 +158,38 @@
     <ul class="project-list">
       <li class="project">
         <div class="image-frame">
-          <img src="/assets/projects/enodios.jpg" alt="Enodios logo" loading="lazy">
+          <picture>
+            <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/asknum-eval-light.svg" alt="asknum-eval mark — hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
+          </picture>
         </div>
-        <h2>Enodios</h2>
+        <h2>asknum-eval</h2>
         <p class="desc">
-          A personal AI agent stack that keeps work, personal, and smart-home
-          contexts in separate silos — coordinating over a small home cluster
-          so no single agent ever sees more than it should. Remembers what past
-          runs did, audits tool calls before they fire, and tracks cost as it goes.
+          Evals for ask-a-question, get-a-number systems. A natural-language
+          question goes in, a number from a governed data source comes out —
+          this repo checks the number. Two tiers over one golden eval set: a
+          tool tier that grades the query engine, and an agent tier that grades
+          the full pipeline, including refusals, caveats, and relative dates.
         </p>
-        <p class="status">unreleased, project still in development</p>
+        <p class="status">open source</p>
+      </li>
+
+      <li class="project">
+        <div class="image-frame">
+          <picture>
+            <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/corylus-light.svg" alt="Corylus mark — woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
+          </picture>
+        </div>
+        <h2>Corylus</h2>
+        <p class="desc">
+          The control layer for an automated agentic work pipeline: fast,
+          reliable human judgment over everything the machines ship. Agents
+          pick up tickets and ship work on a schedule, a judge agent reviews
+          each attempt with a verdict and confidence score, and one screen puts
+          the queue in front of you to approve, send back, or discard.
+        </p>
+        <p class="status">open source</p>
       </li>
 
       <li class="project">
