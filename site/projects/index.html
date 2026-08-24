@@ -43,6 +43,11 @@
       .project {
         grid-template-columns: 1fr;
       }
+
+      /* Single-column layout would otherwise stretch the frame full-width */
+      .project .image-frame {
+        width: 120px;
+      }
     }
 
     .project h2 {
@@ -95,6 +100,18 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    /* Engraving plates keep their natural aspect ratio instead of being
+       cropped into the square frame (which clipped tall artwork) */
+    .image-frame.plate {
+      aspect-ratio: auto;
+      width: 120px;
+    }
+
+    .image-frame.plate img {
+      height: auto;
+      object-fit: contain;
     }
 
     /* Placeholder — faintly tinted square reads as intentional empty state */
@@ -157,13 +174,16 @@
     <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
     <ul class="project-list">
       <li class="project">
-        <div class="image-frame">
+        <div class="image-frame plate">
           <picture>
             <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
             <img src="/assets/projects/asknum-eval-light.svg" alt="asknum-eval mark — hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
           </picture>
         </div>
         <h2>asknum-eval</h2>
+        <div class="project-links">
+          <a href="https://github.com/jcashell1989/asknum-eval">github</a>
+        </div>
         <p class="desc">
           Evals for ask-a-question, get-a-number systems. A natural-language
           question goes in, a number from a governed data source comes out —
@@ -175,13 +195,16 @@
       </li>
 
       <li class="project">
-        <div class="image-frame">
+        <div class="image-frame plate">
           <picture>
             <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
             <img src="/assets/projects/corylus-light.svg" alt="Corylus mark — woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
           </picture>
         </div>
         <h2>Corylus</h2>
+        <div class="project-links">
+          <a href="https://github.com/jcashell1989/corylus">github</a>
+        </div>
         <p class="desc">
           The control layer for an automated agentic work pipeline: fast,
           reliable human judgment over everything the machines ship. Agents
@@ -201,6 +224,9 @@
           </svg>
         </div>
         <h2>Flightdeck</h2>
+        <div class="project-links">
+          <a href="https://github.com/jcashell1989/flightdeck">github</a>
+        </div>
         <p class="desc">
           A mission-control dashboard for running multiple AI coding agents in
           parallel across many repos — one glanceable view of every session on
