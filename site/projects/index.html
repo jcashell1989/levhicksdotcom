@@ -43,6 +43,11 @@
       .project {
         grid-template-columns: 1fr;
       }
+
+      /* Single-column layout would otherwise stretch the frame full-width */
+      .project .image-frame {
+        width: 120px;
+      }
     }
 
     .project h2 {
