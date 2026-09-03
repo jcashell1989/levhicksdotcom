@@ -3,76 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Julian Hicks</title>
+  <title>About · Julian Hicks</title>
   <meta name="description" content="Data scientist in Los Angeles. This is where I put things that don't belong anywhere else.">
   <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/brand/export/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="/assets/brand/export/apple-touch-icon.png">
   <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="About — Julian Hicks">
+  <meta property="og:title" content="About · Julian Hicks">
   <meta property="og:description" content="Data scientist in Los Angeles. This is where I put things that don't belong anywhere else.">
   <meta property="og:image" content="https://julian.levhicks.com/assets/brand/export/logo-512.png">
   <meta property="og:url" content="https://julian.levhicks.com/about/">
-
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    main { max-width: 520px; }
+    h1 { margin-bottom: 20px; }
+    .prose p + p { margin-top: 15px; }
+    .prose .label { margin-top: 40px; margin-bottom: 10px; }
 
-    .about-body p {
-      color: var(--fg);
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 1.1rem;
-    }
-
-    .about-body a {
-      color: var(--gold);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(43, 36, 27, 0.30);
-      transition: color 400ms ease, text-decoration-color 400ms ease;
-    }
-
-    .about-body a:hover,
-    .about-body a:focus-visible {
-      color: var(--gold-hi);
-      text-decoration-color: var(--gold-hi);
-      outline: none;
-    }
-
-    .about-body a:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 3px;
-      border-radius: 1px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .about-body a {
-        text-decoration-color: rgba(232, 225, 210, 0.20);
-      }
+    .inline-list { display: flex; flex-wrap: wrap; }
+    .inline-list li + li::before {
+      content: "\00B7";
+      color: var(--muted);
+      margin: 0 0.5em;
     }
   </style>
 </head>
 <body>
-  <main>
-    <nav class="page-chrome" aria-label="Page navigation">
-      <a href="/" class="header-mark" aria-label="home"><picture><source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo/logo-mark-black.svg" alt="" width="28" height="28"></picture></a>
-      <a class="back-link" href="/">&#8592; home</a>
-    </nav>
-    <div class="rule" role="presentation"></div>
-    <h1>About</h1>
-    <div class="about-body">
-      <p>Data Scientist, raised and living in Los Angeles. I work for Bird (the scooters) and I focus mostly on supply & demand balancing and, lately, agentic solutions.</p>
-      <p>A lot of things catch my interest, and I try to keep that interest harnessed appropriately.</p>
-      <p>The best way to reach me is <a href="mailto:julian@levhicks.com">email</a>. I answer when I can.</p>
-    </div>
-    <footer class="site-footer">
-      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
-    </footer>
-  </main>
+  <div class="page">
+    <header class="rail">
+      <picture>
+        <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="44" height="44">
+      </picture>
+      <nav class="rail-nav" aria-label="Site">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/about/" aria-current="page">About</a></li>
+          <li class="sep" role="presentation"></li>
+          <li><a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a></li>
+          <li><a href="https://github.com/jcashell1989">GitHub</a></li>
+          <li><a href="mailto:julian@levhicks.com">Email</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="rule" role="presentation"></div>
+      <h1>About</h1>
+      <div class="prose">
+        <p>Data scientist, raised and living in Los Angeles. I work for Bird (the scooters) and focus mostly on supply and demand balancing and, lately, agentic solutions.</p>
+        <p>A lot of things catch my interest, and I try to keep that interest harnessed appropriately.</p>
+
+        <h2 class="label">How I work</h2>
+        <p>Agent-native. Claude Code, Cursor, Pi, and Hermes Agent are in the loop daily. My job is increasingly writing tickets, reviewing diffs, and calibrating how much to trust the machines.</p>
+
+        <h2 class="label">Toolbox</h2>
+        <ul class="inline-list">
+          <li>Python</li>
+          <li>SQL</li>
+          <li>PySpark</li>
+          <li>CatBoost</li>
+          <li>SageMaker</li>
+          <li>Airflow</li>
+          <li>MCP</li>
+          <li>R</li>
+        </ul>
+
+        <h2 class="label">Elsewhere</h2>
+        <p>The best way to reach me is <a href="mailto:julian@levhicks.com">email</a>. I answer when I can. I am also on <a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a> and <a href="https://github.com/jcashell1989">GitHub</a>.</p>
+      </div>
+      <footer class="site-footer label">&copy; Julian Hicks</footer>
+    </main>
+  </div>
 </body>
 </html>
