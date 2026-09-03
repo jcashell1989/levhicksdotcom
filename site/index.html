@@ -18,86 +18,227 @@
   <meta property="og:url" content="https://julian.levhicks.com/">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    .tagline { margin-top: 10px; }
-    .lead { margin-top: 20px; }
-
-    section { margin-top: 60px; }
-    section > .label { margin-bottom: 10px; }
-
-    .project-rows li {
-      border-top: 1px solid var(--hair);
-      padding: 15px 0;
+    /* Book of plates: one quiet page. Hierarchy from space and weight only. */
+    :root {
+      --sw1: #2B241B; --sw2: #8B3232; --sw3: #3D6B3E; --sw4: #8A7028;
+      --sw5: #3A5563; --sw6: #7A0558; --sw7: #4A7A86; --sw8: #D8D2C6;
     }
-    .project-rows li:last-child { border-bottom: 1px solid var(--hair); }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sw1: #4F473B; --sw2: #B05050; --sw3: #5B8A5C; --sw4: #D4AF5A;
+        --sw5: #556F7C; --sw6: #910766; --sw7: #78AEBB; --sw8: #D6D3CE;
+      }
+    }
 
-    .project-rows a {
-      color: var(--fg);
+    body { line-height: 1.7; }
+
+    .sheet { padding: 48px 20px 96px; }
+
+    header, section { display: grid; grid-template-columns: minmax(0, 560px); align-items: start; }
+    section { margin-top: 64px; }
+
+    .gloss {
+      font-size: 0.75rem;
       font-weight: 700;
-      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    h1 { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.7; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.9375rem; }
+    .lead { margin-top: 20px; }
+    .site-mark { width: 48px; height: 48px; margin-bottom: 20px; }
+
+    p + p { margin-top: 15px; }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+    /* Plates */
+    .plates { display: flex; flex-direction: column; gap: 80px; }
+    .plate img, .color-plate { max-width: 320px; width: 100%; }
+    .plate img { height: auto; }
+    figcaption { margin-top: 15px; }
+    .cap-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 15px;
+    }
+    .cap-name { font-size: 1rem; font-weight: 700; color: var(--fg); }
+    .cap-desc, .cap-wanting { font-size: 0.9375rem; color: var(--muted); margin-top: 5px; }
+    .cap-wanting { font-style: italic; }
+    .cap-links { margin-top: 5px; }
+    .cap-links a, .links a {
+      font-weight: 700;
+      text-transform: lowercase;
       background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
       background-size: 0% 1.5px;
       background-position: 0 100%;
       background-repeat: no-repeat;
-      transition: background-size 400ms var(--ease);
+      transition: background-size 300ms var(--ease);
     }
-    .project-rows a:hover { background-size: 100% 1.5px; }
+    .cap-links a { font-size: 0.875rem; }
+    .cap-links a:hover, .cap-links a:focus-visible,
+    .links a:hover, .links a:focus-visible { background-size: 100% 1.5px; }
 
-    .project-rows p { color: var(--muted); font-size: 0.9375rem; }
+    .color-plate { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+    .chip { display: block; aspect-ratio: 1; border: 1px solid var(--hair); border-radius: 2px; }
+    .chip:nth-child(1) { background: var(--sw1); }
+    .chip:nth-child(2) { background: var(--sw2); }
+    .chip:nth-child(3) { background: var(--sw3); }
+    .chip:nth-child(4) { background: var(--sw4); }
+    .chip:nth-child(5) { background: var(--sw5); }
+    .chip:nth-child(6) { background: var(--sw6); }
+    .chip:nth-child(7) { background: var(--sw7); }
+    .chip:nth-child(8) { background: var(--sw8); }
+    .hex {
+      font-size: 0.625rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.4;
+    }
 
-    .more { display: inline-block; margin-top: 15px; font-weight: 700; }
+    /* ponytail: eight hex labels do not fit under 480px; the aria-label still carries them */
+    @media (max-width: 480px) { .hex { display: none; } }
+
+    .inline-list { display: flex; flex-wrap: wrap; margin-top: 15px; }
+    .inline-list li + li::before { content: "\00b7"; margin: 0 10px; }
+
+    .links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    .links a { font-size: 0.9375rem; }
+
+    .hair { width: 2rem; height: 1px; background: var(--hair); margin-top: 20px; }
+    footer.gloss { margin-top: 10px; margin-bottom: 0; }
+
+    @media (min-width: 880px) {
+      .sheet { padding: 120px 40px 160px 12%; }
+      header, section {
+        grid-template-columns: 140px minmax(0, 560px);
+        column-gap: 40px;
+      }
+      section { margin-top: 100px; }
+      .gloss { margin-bottom: 0; }
+      .site-mark { margin-bottom: 0; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="rail">
+  <main class="sheet">
+    <header>
       <picture>
         <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
-        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="44" height="44">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="48" height="48">
       </picture>
-      <nav class="rail-nav" aria-label="Site">
-        <ul>
-          <li><a href="/" aria-current="page">Home</a></li>
-          <li><a href="/projects/">Projects</a></li>
-          <li><a href="/about/">About</a></li>
-          <li class="sep" role="presentation"></li>
-          <li><a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a></li>
-          <li><a href="https://github.com/jcashell1989">GitHub</a></li>
-          <li><a href="mailto:julian@levhicks.com">Email</a></li>
-        </ul>
-      </nav>
+      <div>
+        <h1>Julian Hicks</h1>
+        <p class="muted">Data scientist &amp; compulsive tinkerer. Cities, models, and the occasional apocalypse.</p>
+        <p class="lead">I build production ML systems, the measurement to know whether they work, and the agent tooling to build them faster.</p>
+      </div>
     </header>
-    <main>
-      <div class="rule" role="presentation"></div>
-      <h1 class="display">Julian Hicks</h1>
-      <p class="tagline">Data scientist &amp; compulsive tinkerer. Cities, models, and the occasional apocalypse.</p>
-      <p class="lead">I build production ML systems, the measurement to know whether they work, and the agent tooling to build them faster.</p>
 
-      <section aria-labelledby="sel">
-        <h2 class="label" id="sel">Selected projects</h2>
-        <ul class="project-rows">
-          <li>
-            <a href="https://github.com/jcashell1989/asknum-eval">asknum-eval</a>
-            <p>Evals for ask-a-question, get-a-number systems.</p>
-          </li>
-          <li>
-            <a href="https://github.com/jcashell1989/corylus">Corylus</a>
-            <p>A review queue for judged agent work. The agents do the work; a human answers for it.</p>
-          </li>
-          <li>
-            <a href="https://github.com/jcashell1989/cleo-parchment">cleo-parchment</a>
-            <p>A warm terminal color scheme in light and dark. Same palette as this page.</p>
-          </li>
+    <section id="plates">
+      <h2 class="gloss">Plates</h2>
+      <div class="plates">
+        <figure class="plate">
+          <picture>
+            <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/asknum-eval-light.svg" alt="Hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
+          </picture>
+          <figcaption>
+            <div><span class="cap-num">Plate I</span><b class="cap-name">asknum-eval</b></div>
+            <p class="cap-desc">Evals for ask-a-question, get-a-number systems. A question goes in, a number comes out of a governed data source, and this checks the number.</p>
+            <p class="cap-links"><a href="https://github.com/jcashell1989/asknum-eval">github</a></p>
+          </figcaption>
+        </figure>
+
+        <figure class="plate">
+          <picture>
+            <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/corylus-light.svg" alt="Woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
+          </picture>
+          <figcaption>
+            <div><span class="cap-num">Plate II</span><b class="cap-name">Corylus</b></div>
+            <p class="cap-desc">A review queue for judged agent work. Agents pick up tickets on a schedule, a judge reads each attempt, and one screen puts the verdicts in front of a person.</p>
+            <p class="cap-links"><a href="https://github.com/jcashell1989/corylus">github</a></p>
+          </figcaption>
+        </figure>
+
+        <figure class="plate">
+          <div class="color-plate" role="img" aria-label="Cleo Parchment palette: eight terminal colors with hex values">
+            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+            <span class="hex" data-dark="#4F473B">#2B241B</span>
+            <span class="hex" data-dark="#B05050">#8B3232</span>
+            <span class="hex" data-dark="#5B8A5C">#3D6B3E</span>
+            <span class="hex" data-dark="#D4AF5A">#8A7028</span>
+            <span class="hex" data-dark="#556F7C">#3A5563</span>
+            <span class="hex" data-dark="#910766">#7A0558</span>
+            <span class="hex" data-dark="#78AEBB">#4A7A86</span>
+            <span class="hex" data-dark="#D6D3CE">#D8D2C6</span>
+          </div>
+          <figcaption>
+            <div><span class="cap-num">Plate III</span><b class="cap-name">cleo-parchment</b></div>
+            <p class="cap-desc">A warm, earthy terminal color scheme in light and dark. This page is set in the same palette.</p>
+            <p class="cap-links"><a href="https://github.com/jcashell1989/cleo-parchment">github</a></p>
+          </figcaption>
+        </figure>
+
+        <figure class="plate">
+          <figcaption>
+            <div><span class="cap-num">Plate IV</span><b class="cap-name">Flightdeck</b></div>
+            <p class="cap-wanting">Plate IV is wanting.</p>
+            <p class="cap-desc">A desktop dashboard for running several AI coding agents across several projects. Paused.</p>
+            <p class="cap-links"><a href="https://github.com/jcashell1989/flightdeck">github</a></p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="gloss">About</h2>
+      <div>
+        <p>Data scientist, raised and living in Los Angeles. I work for Bird (the scooters) and focus mostly on supply and demand balancing and, lately, agentic solutions.</p>
+        <p>Agent-native. Claude Code, Cursor, Pi, and Hermes Agent are in the loop daily. My job is increasingly writing tickets, reviewing diffs, and calibrating how much to trust the machines.</p>
+        <p>A lot of things catch my interest, and I try to keep that interest harnessed appropriately.</p>
+        <p class="muted small">Urbanism, decarbonization, tabletop RPGs, watchmaking, geospatial everything.</p>
+        <ul class="inline-list muted small">
+          <li>Python</li><li>SQL</li><li>PySpark</li><li>CatBoost</li><li>SageMaker</li><li>Airflow</li><li>MCP</li><li>R</li>
         </ul>
-        <a class="more" href="/projects/">All projects &rarr;</a>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="int">
-        <h2 class="label" id="int">Interests</h2>
-        <p>Urbanism, decarbonization, tabletop RPGs, watchmaking, geospatial everything.</p>
-      </section>
-
-      <footer class="site-footer label">&copy; Julian Hicks</footer>
-    </main>
-  </div>
+    <section id="elsewhere">
+      <h2 class="gloss">Elsewhere</h2>
+      <div>
+        <nav class="links" aria-label="Elsewhere">
+          <a href="mailto:julian@levhicks.com">email</a>
+          <a href="https://www.linkedin.com/in/julianchicks/">linkedin</a>
+          <a href="https://github.com/jcashell1989">github</a>
+        </nav>
+        <div class="hair" role="presentation"></div>
+        <footer class="gloss">&copy; Julian Hicks</footer>
+      </div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      var mq = matchMedia('(prefers-color-scheme: dark)');
+      var hexes = document.querySelectorAll('.hex');
+      hexes.forEach(function (el) { el.dataset.light = el.textContent; });
+      function swap() {
+        hexes.forEach(function (el) { el.textContent = mq.matches ? el.dataset.dark : el.dataset.light; });
+      }
+      swap();
+      mq.addEventListener('change', swap);
+    })();
+  </script>
 </body>
 </html>
