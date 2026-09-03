@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://julian.levhicks.com/">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    /* Book of plates: the original's first screen, then one quiet page.
+    /* The original's first screen, then one quiet page.
        Below the header, hierarchy comes from space and weight only. */
     :root {
       --sw1: #2B241B; --sw2: #8B3232; --sw3: #3D6B3E; --sw4: #8A7028;
@@ -76,23 +76,12 @@
     .cap-links a:hover, .cap-links a:focus-visible,
     .links a:hover, .links a:focus-visible { background-size: 100% 1.5px; }
 
-    /* Plates: numbers index engravings. Entries without one follow, unnumbered. */
-    .plates { display: flex; flex-direction: column; gap: 80px; }
-    .plate img { display: block; max-width: 320px; width: 100%; height: auto; }
-    figcaption { margin-top: 15px; }
-    .cap-head { display: flex; align-items: baseline; gap: 15px; }
-    .cap-num {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    /* Projects: a small mark where one exists, then name, line, link. */
+    .projects { display: flex; flex-direction: column; gap: 48px; }
+    .project img { display: block; max-width: 160px; width: 100%; height: auto; margin-bottom: 15px; }
     h3.cap-name { font-size: 1rem; font-weight: 700; color: var(--fg); line-height: 1.7; }
     .cap-desc { font-size: 0.9375rem; color: var(--muted); margin-top: 5px; }
     .cap-links { margin-top: 5px; }
-
-    .entries { display: flex; flex-direction: column; gap: 40px; margin-top: 60px; }
 
     .color-plate { display: grid; grid-template-columns: repeat(8, 24px); gap: 5px; margin-bottom: 15px; }
     .chip { display: block; aspect-ratio: 1; border: 1px solid var(--hair); border-radius: 2px; }
@@ -142,54 +131,6 @@
       </div>
     </header>
 
-    <section id="plates">
-      <h2 class="gloss">Plates</h2>
-      <div>
-        <div class="plates">
-          <figure class="plate">
-            <picture>
-              <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
-              <img src="/assets/projects/asknum-eval-light.svg" alt="Hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
-            </picture>
-            <figcaption>
-              <div class="cap-head"><span class="cap-num">Plate I</span><h3 class="cap-name">asknum-eval</h3></div>
-              <p class="cap-desc">Evals for ask-a-question, get-a-number systems. A question goes in, a number comes out of a governed data source, and this checks the number.</p>
-              <p class="cap-links"><a href="https://github.com/jcashell1989/asknum-eval">github</a></p>
-            </figcaption>
-          </figure>
-
-          <figure class="plate">
-            <picture>
-              <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
-              <img src="/assets/projects/corylus-light.svg" alt="Woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
-            </picture>
-            <figcaption>
-              <div class="cap-head"><span class="cap-num">Plate II</span><h3 class="cap-name">Corylus</h3></div>
-              <p class="cap-desc">A review queue for judged agent work. The agents do the work; a human answers for it.</p>
-              <p class="cap-links"><a href="https://github.com/jcashell1989/corylus">github</a></p>
-            </figcaption>
-          </figure>
-        </div>
-
-        <div class="entries">
-          <div class="entry">
-            <div class="color-plate" role="img" aria-label="Cleo Parchment palette: eight terminal colors">
-              <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
-              <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
-            </div>
-            <h3 class="cap-name">cleo-parchment</h3>
-            <p class="cap-desc">A warm, earthy terminal color scheme in light and dark. This page is set in the same palette.</p>
-            <p class="cap-links"><a href="https://github.com/jcashell1989/cleo-parchment">github</a></p>
-          </div>
-
-          <div class="entry">
-            <h3 class="cap-name">Flightdeck</h3>
-            <p class="cap-desc">A desktop dashboard for running several AI coding agents across several projects. Paused.</p>
-            <p class="cap-links"><a href="https://github.com/jcashell1989/flightdeck">github</a></p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section id="about">
       <h2 class="gloss">About</h2>
@@ -202,6 +143,47 @@
         <ul class="inline-list muted small">
           <li>Python</li><li>SQL</li><li>PySpark</li><li>CatBoost</li><li>SageMaker</li><li>Airflow</li><li>MCP</li><li>R</li>
         </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="gloss">Projects</h2>
+      <div class="projects">
+        <div class="project">
+          <picture>
+            <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/asknum-eval-light.svg" alt="Hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
+          </picture>
+          <h3 class="cap-name">asknum-eval</h3>
+          <p class="cap-desc">Evals for ask-a-question, get-a-number systems. A question goes in, a number comes out of a governed data source, and this checks the number.</p>
+          <p class="cap-links"><a href="https://github.com/jcashell1989/asknum-eval">github</a></p>
+        </div>
+
+        <div class="project">
+          <picture>
+            <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
+            <img src="/assets/projects/corylus-light.svg" alt="Woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
+          </picture>
+          <h3 class="cap-name">Corylus</h3>
+          <p class="cap-desc">A review queue for judged agent work. The agents do the work; a human answers for it.</p>
+          <p class="cap-links"><a href="https://github.com/jcashell1989/corylus">github</a></p>
+        </div>
+
+        <div class="project">
+          <div class="color-plate" role="img" aria-label="Cleo Parchment palette: eight terminal colors">
+            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+          </div>
+          <h3 class="cap-name">cleo-parchment</h3>
+          <p class="cap-desc">A warm, earthy terminal color scheme in light and dark. This page is set in the same palette.</p>
+          <p class="cap-links"><a href="https://github.com/jcashell1989/cleo-parchment">github</a></p>
+        </div>
+
+        <div class="project">
+          <h3 class="cap-name">Flightdeck</h3>
+          <p class="cap-desc">A desktop dashboard for running several AI coding agents across several projects. Paused.</p>
+          <p class="cap-links"><a href="https://github.com/jcashell1989/flightdeck">github</a></p>
+        </div>
         <div class="hair" role="presentation"></div>
         <footer class="gloss">&copy; Julian Hicks</footer>
       </div>

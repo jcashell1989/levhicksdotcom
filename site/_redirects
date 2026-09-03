@@ -8,7 +8,7 @@ https://levhicks.com/*      https://julian.levhicks.com/:splat  301!
 https://www.levhicks.com/*  https://julian.levhicks.com/:splat  301!
 
 # Speculative single-page layout: old section URLs land on their anchors.
-/projects/     /#plates     301!
-/projects      /#plates     301!
+/projects/     /#projects     301!
+/projects      /#projects     301!
 /about/        /#about      301!
 /about         /#about      301!
