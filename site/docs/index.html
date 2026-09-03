@@ -3,30 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docs — Julian Hicks</title>
+  <title>Docs · Julian Hicks</title>
   <meta name="description" content="Document lookup.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/brand/export/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="/assets/brand/export/apple-touch-icon.png">
+  <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    main { max-width: 420px; }
+    .tagline { margin: 10px 0 40px; }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-
-    label {
-      color: var(--muted);
-      font-size: 0.8125rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    .field { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; max-width: 420px; }
 
     input[type="text"] {
       appearance: none;
@@ -35,83 +25,77 @@
       border-bottom: 1.5px solid var(--fg);
       border-radius: 0;
       color: var(--fg);
-      font-family: inherit;
+      font: inherit;
       font-size: 1.125rem;
-      line-height: 1.5;
-      padding: 1rem 0;
+      padding: 10px 0;
       width: 100%;
       outline: none;
-      transition: border-color 0.15s ease;
+      transition: border-color 400ms var(--ease);
     }
-
-    input[type="text"]:focus,
-    input[type="text"]:focus-visible {
-      border-bottom-color: var(--green);
-    }
+    input[type="text"]:focus-visible { border-bottom-color: var(--green); }
 
     button[type="submit"] {
       appearance: none;
       background: none;
       border: none;
       cursor: pointer;
-      font-family: inherit;
+      font: inherit;
       color: var(--gold);
       font-weight: 700;
-      font-size: 0.9375rem;
-      letter-spacing: 0.04em;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      display: inline-block;
       padding: 0.2rem 0;
       background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
       background-size: 0% 1.5px;
       background-position: 0 100%;
       background-repeat: no-repeat;
-      transition: background-size 0.2s ease, color 0.15s ease;
+      transition: background-size 400ms var(--ease);
     }
-
-    button[type="submit"]:hover,
-    button[type="submit"]:focus-visible {
-      color: var(--gold-hi);
-      background-size: 100% 1.5px;
-      outline: none;
-    }
-
+    button[type="submit"]:hover { background-size: 100% 1.5px; }
     button[type="submit"]:focus-visible {
       outline: 2px solid var(--green);
       outline-offset: 3px;
       border-radius: 1px;
     }
 
-    .status {
-      margin-top: 1.5rem;
-      color: var(--muted);
-      min-height: 1.5rem;
-      font-size: 0.9375rem;
-    }
+    .status { margin-top: 20px; color: var(--muted); min-height: 1.5rem; font-size: 0.9375rem; }
   </style>
 </head>
 <body>
-  <main>
-    <a class="back-link" href="/">← Home</a>
-    <h1>Docs</h1>
-    <p class="tagline">Enter a document code to continue.</p>
-    <div class="rule" role="presentation"></div>
-    <form id="lookup" novalidate>
-      <div class="field">
-        <label for="code">Document code</label>
-        <input
-          id="code"
-          type="text"
-          autocomplete="off"
-          spellcheck="false"
-          autocapitalize="off"
-          required
-        >
-      </div>
-      <button type="submit">Look up →</button>
-    </form>
-    <p id="status" class="status" aria-live="polite"></p>
-  </main>
+  <div class="page">
+    <header class="rail">
+      <picture>
+        <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="44" height="44">
+      </picture>
+      <nav class="rail-nav" aria-label="Site">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/about/">About</a></li>
+          <li class="sep" role="presentation"></li>
+          <li><a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a></li>
+          <li><a href="https://github.com/jcashell1989">GitHub</a></li>
+          <li><a href="mailto:julian@levhicks.com">Email</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="rule" role="presentation"></div>
+      <h1>Docs</h1>
+      <p class="tagline">Enter a document code to continue.</p>
+      <form id="lookup" novalidate>
+        <div class="field">
+          <label class="label" for="code">Document code</label>
+          <input id="code" type="text" autocomplete="off" spellcheck="false" autocapitalize="off" required>
+        </div>
+        <button type="submit">Look up &rarr;</button>
+      </form>
+      <p id="status" class="status" aria-live="polite"></p>
+      <footer class="site-footer label">&copy; Julian Hicks</footer>
+    </main>
+  </div>
   <script>
     const docs = {
       // Add new docs here
