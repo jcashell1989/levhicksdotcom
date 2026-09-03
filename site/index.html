@@ -18,7 +18,8 @@
   <meta property="og:url" content="https://julian.levhicks.com/">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    /* Book of plates: one quiet page. Hierarchy from space and weight only. */
+    /* Book of plates: the original's first screen, then one quiet page.
+       Below the header, hierarchy comes from space and weight only. */
     :root {
       --sw1: #2B241B; --sw2: #8B3232; --sw3: #3D6B3E; --sw4: #8A7028;
       --sw5: #3A5563; --sw6: #7A0558; --sw7: #4A7A86; --sw8: #D8D2C6;
@@ -47,34 +48,21 @@
       margin-bottom: 10px;
     }
 
-    h1 { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.7; }
+    /* First screen: the original's opening */
+    .site-mark { width: 72px; height: 72px; margin-bottom: 20px; }
+    h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 10px; }
+    .tagline { color: var(--muted); margin-bottom: 20px; }
+    .links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    .links a { font-size: 0.9375rem; }
+    .rule { width: 2rem; height: 2px; background: var(--green); margin-top: 30px; }
+
     .muted { color: var(--muted); }
     .small { font-size: 0.9375rem; }
-    .lead { margin-top: 20px; }
-    .site-mark { width: 48px; height: 48px; margin-bottom: 20px; }
-
     p + p { margin-top: 15px; }
 
     a { color: var(--gold); text-decoration: none; }
     a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
 
-    /* Plates */
-    .plates { display: flex; flex-direction: column; gap: 80px; }
-    .plate img, .color-plate { max-width: 320px; width: 100%; }
-    .plate img { height: auto; }
-    figcaption { margin-top: 15px; }
-    .cap-num {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-right: 15px;
-    }
-    .cap-name { font-size: 1rem; font-weight: 700; color: var(--fg); }
-    .cap-desc, .cap-wanting { font-size: 0.9375rem; color: var(--muted); margin-top: 5px; }
-    .cap-wanting { font-style: italic; }
-    .cap-links { margin-top: 5px; }
     .cap-links a, .links a {
       font-weight: 700;
       text-transform: lowercase;
@@ -88,7 +76,25 @@
     .cap-links a:hover, .cap-links a:focus-visible,
     .links a:hover, .links a:focus-visible { background-size: 100% 1.5px; }
 
-    .color-plate { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+    /* Plates: numbers index engravings. Entries without one follow, unnumbered. */
+    .plates { display: flex; flex-direction: column; gap: 80px; }
+    .plate img { display: block; max-width: 320px; width: 100%; height: auto; }
+    figcaption { margin-top: 15px; }
+    .cap-head { display: flex; align-items: baseline; gap: 15px; }
+    .cap-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    h3.cap-name { font-size: 1rem; font-weight: 700; color: var(--fg); line-height: 1.7; }
+    .cap-desc { font-size: 0.9375rem; color: var(--muted); margin-top: 5px; }
+    .cap-links { margin-top: 5px; }
+
+    .entries { display: flex; flex-direction: column; gap: 40px; margin-top: 60px; }
+
+    .color-plate { display: grid; grid-template-columns: repeat(8, 24px); gap: 5px; margin-bottom: 15px; }
     .chip { display: block; aspect-ratio: 1; border: 1px solid var(--hair); border-radius: 2px; }
     .chip:nth-child(1) { background: var(--sw1); }
     .chip:nth-child(2) { background: var(--sw2); }
@@ -98,28 +104,15 @@
     .chip:nth-child(6) { background: var(--sw6); }
     .chip:nth-child(7) { background: var(--sw7); }
     .chip:nth-child(8) { background: var(--sw8); }
-    .hex {
-      font-size: 0.625rem;
-      font-variant-numeric: tabular-nums;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    /* ponytail: eight hex labels do not fit under 480px; the aria-label still carries them */
-    @media (max-width: 480px) { .hex { display: none; } }
 
     .inline-list { display: flex; flex-wrap: wrap; margin-top: 15px; }
     .inline-list li + li::before { content: "\00b7"; margin: 0 10px; }
 
-    .links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .links a { font-size: 0.9375rem; }
-
-    .hair { width: 2rem; height: 1px; background: var(--hair); margin-top: 20px; }
+    .hair { width: 2rem; height: 1px; background: var(--hair); margin-top: 60px; }
     footer.gloss { margin-top: 10px; margin-bottom: 0; }
 
     @media (min-width: 880px) {
-      .sheet { padding: 120px 40px 160px 12%; }
+      .sheet { padding: 120px 40px 160px 10%; }
       header, section {
         grid-template-columns: 140px minmax(0, 560px);
         column-gap: 40px;
@@ -135,76 +128,73 @@
     <header>
       <picture>
         <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
-        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="48" height="48">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="72" height="72">
       </picture>
       <div>
         <h1>Julian Hicks</h1>
-        <p class="muted">Data scientist &amp; compulsive tinkerer. Cities, models, and the occasional apocalypse.</p>
-        <p class="lead">I build production ML systems, the measurement to know whether they work, and the agent tooling to build them faster.</p>
+        <p class="tagline">Data scientist &amp; compulsive tinkerer. Cities, models, and the occasional apocalypse.</p>
+        <nav class="links" aria-label="Elsewhere">
+          <a href="mailto:julian@levhicks.com">email</a>
+          <a href="https://www.linkedin.com/in/julianchicks/">linkedin</a>
+          <a href="https://github.com/jcashell1989">github</a>
+        </nav>
+        <div class="rule" role="presentation"></div>
       </div>
     </header>
 
     <section id="plates">
       <h2 class="gloss">Plates</h2>
-      <div class="plates">
-        <figure class="plate">
-          <picture>
-            <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
-            <img src="/assets/projects/asknum-eval-light.svg" alt="Hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
-          </picture>
-          <figcaption>
-            <div><span class="cap-num">Plate I</span><b class="cap-name">asknum-eval</b></div>
-            <p class="cap-desc">Evals for ask-a-question, get-a-number systems. A question goes in, a number comes out of a governed data source, and this checks the number.</p>
-            <p class="cap-links"><a href="https://github.com/jcashell1989/asknum-eval">github</a></p>
-          </figcaption>
-        </figure>
+      <div>
+        <div class="plates">
+          <figure class="plate">
+            <picture>
+              <source srcset="/assets/projects/asknum-eval-dark.svg" media="(prefers-color-scheme: dark)">
+              <img src="/assets/projects/asknum-eval-light.svg" alt="Hydrostatic balance, after a nineteenth-century engraving" loading="lazy">
+            </picture>
+            <figcaption>
+              <div class="cap-head"><span class="cap-num">Plate I</span><h3 class="cap-name">asknum-eval</h3></div>
+              <p class="cap-desc">Evals for ask-a-question, get-a-number systems. A question goes in, a number comes out of a governed data source, and this checks the number.</p>
+              <p class="cap-links"><a href="https://github.com/jcashell1989/asknum-eval">github</a></p>
+            </figcaption>
+          </figure>
 
-        <figure class="plate">
-          <picture>
-            <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
-            <img src="/assets/projects/corylus-light.svg" alt="Woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
-          </picture>
-          <figcaption>
-            <div><span class="cap-num">Plate II</span><b class="cap-name">Corylus</b></div>
-            <p class="cap-desc">A review queue for judged agent work. Agents pick up tickets on a schedule, a judge reads each attempt, and one screen puts the verdicts in front of a person.</p>
-            <p class="cap-links"><a href="https://github.com/jcashell1989/corylus">github</a></p>
-          </figcaption>
-        </figure>
+          <figure class="plate">
+            <picture>
+              <source srcset="/assets/projects/corylus-dark.svg" media="(prefers-color-scheme: dark)">
+              <img src="/assets/projects/corylus-light.svg" alt="Woman operating a flax brake, after a nineteenth-century engraving" loading="lazy">
+            </picture>
+            <figcaption>
+              <div class="cap-head"><span class="cap-num">Plate II</span><h3 class="cap-name">Corylus</h3></div>
+              <p class="cap-desc">A review queue for judged agent work. The agents do the work; a human answers for it.</p>
+              <p class="cap-links"><a href="https://github.com/jcashell1989/corylus">github</a></p>
+            </figcaption>
+          </figure>
+        </div>
 
-        <figure class="plate">
-          <div class="color-plate" role="img" aria-label="Cleo Parchment palette: eight terminal colors with hex values">
-            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
-            <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
-            <span class="hex" data-dark="#4F473B">#2B241B</span>
-            <span class="hex" data-dark="#B05050">#8B3232</span>
-            <span class="hex" data-dark="#5B8A5C">#3D6B3E</span>
-            <span class="hex" data-dark="#D4AF5A">#8A7028</span>
-            <span class="hex" data-dark="#556F7C">#3A5563</span>
-            <span class="hex" data-dark="#910766">#7A0558</span>
-            <span class="hex" data-dark="#78AEBB">#4A7A86</span>
-            <span class="hex" data-dark="#D6D3CE">#D8D2C6</span>
-          </div>
-          <figcaption>
-            <div><span class="cap-num">Plate III</span><b class="cap-name">cleo-parchment</b></div>
+        <div class="entries">
+          <div class="entry">
+            <div class="color-plate" role="img" aria-label="Cleo Parchment palette: eight terminal colors">
+              <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+              <span class="chip"></span><span class="chip"></span><span class="chip"></span><span class="chip"></span>
+            </div>
+            <h3 class="cap-name">cleo-parchment</h3>
             <p class="cap-desc">A warm, earthy terminal color scheme in light and dark. This page is set in the same palette.</p>
             <p class="cap-links"><a href="https://github.com/jcashell1989/cleo-parchment">github</a></p>
-          </figcaption>
-        </figure>
+          </div>
 
-        <figure class="plate">
-          <figcaption>
-            <div><span class="cap-num">Plate IV</span><b class="cap-name">Flightdeck</b></div>
-            <p class="cap-wanting">Plate IV is wanting.</p>
+          <div class="entry">
+            <h3 class="cap-name">Flightdeck</h3>
             <p class="cap-desc">A desktop dashboard for running several AI coding agents across several projects. Paused.</p>
             <p class="cap-links"><a href="https://github.com/jcashell1989/flightdeck">github</a></p>
-          </figcaption>
-        </figure>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="about">
       <h2 class="gloss">About</h2>
       <div>
+        <p>I build production ML systems, the measurement to know whether they work, and the agent tooling to build them faster.</p>
         <p>Data scientist, raised and living in Los Angeles. I work for Bird (the scooters) and focus mostly on supply and demand balancing and, lately, agentic solutions.</p>
         <p>Agent-native. Claude Code, Cursor, Pi, and Hermes Agent are in the loop daily. My job is increasingly writing tickets, reviewing diffs, and calibrating how much to trust the machines.</p>
         <p>A lot of things catch my interest, and I try to keep that interest harnessed appropriately.</p>
@@ -212,33 +202,10 @@
         <ul class="inline-list muted small">
           <li>Python</li><li>SQL</li><li>PySpark</li><li>CatBoost</li><li>SageMaker</li><li>Airflow</li><li>MCP</li><li>R</li>
         </ul>
-      </div>
-    </section>
-
-    <section id="elsewhere">
-      <h2 class="gloss">Elsewhere</h2>
-      <div>
-        <nav class="links" aria-label="Elsewhere">
-          <a href="mailto:julian@levhicks.com">email</a>
-          <a href="https://www.linkedin.com/in/julianchicks/">linkedin</a>
-          <a href="https://github.com/jcashell1989">github</a>
-        </nav>
         <div class="hair" role="presentation"></div>
         <footer class="gloss">&copy; Julian Hicks</footer>
       </div>
     </section>
   </main>
-  <script>
-    (function () {
-      var mq = matchMedia('(prefers-color-scheme: dark)');
-      var hexes = document.querySelectorAll('.hex');
-      hexes.forEach(function (el) { el.dataset.light = el.textContent; });
-      function swap() {
-        hexes.forEach(function (el) { el.textContent = mq.matches ? el.dataset.dark : el.dataset.light; });
-      }
-      swap();
-      mq.addEventListener('change', swap);
-    })();
-  </script>
 </body>
 </html>
