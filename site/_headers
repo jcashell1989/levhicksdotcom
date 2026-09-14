@@ -1,0 +1,5 @@
+# Unlisted, password-protected case-study deck: keep crawlers and caches out.
+/case-studies/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Cache-Control: no-store
+  Referrer-Policy: no-referrer
