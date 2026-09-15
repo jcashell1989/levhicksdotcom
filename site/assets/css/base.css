@@ -1,10 +1,10 @@
-/* levhicks.com — shared base styles
+/* levhicks.com - shared base styles (Catkin v2)
  *
- * Tokens, reset, typography, and common components used across the site.
+ * Tokens, reset, typography, page chrome (rail + content column).
  * Page-specific layout stays inline in each page's <style>.
  */
 
-/* Self-hosted Atkinson Hyperlegible Next — variable font, regular + bold
+/* Self-hosted Atkinson Hyperlegible Next - variable font, regular + bold
  * served from the same file via font-weight axis. Latin + latin-ext subsets. */
 @font-face {
   font-family: 'Atkinson Hyperlegible Next';
@@ -39,257 +39,219 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* Playfair Display — display serif for headings (upright + italic, latin) */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url('/assets/fonts/playfair-upright-latin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: italic;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url('/assets/fonts/playfair-italic-latin.woff2') format('woff2');
-}
-
-/* Maple Mono — monospace for code blocks (regular + bold) */
-@font-face {
-  font-family: 'Maple Mono NF';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/maple-mono-regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Maple Mono NF';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/maple-mono-bold.woff2') format('woff2');
-}
-
+/* ─── Tokens ─────────────────────────────────────────────────────── */
 :root {
   --bg:      #F5F0E8;
+  --bg-2:    #EAE3D6;
   --fg:      #2B241B;
   --muted:   #5A5347;
-  --green:    #3D6B3E;
-  --gold:     #7A6020;
-  --gold-hi:  #C9A54E;
-  --slate:    #3A5563;
-  --clay:     #8B3232;
+  --gold:    #7A6020;
+  --gold-hi: #B8922E;
+  --green:   #3D6B3E;
+  --hair:    rgba(43, 36, 27, 0.14);
 
-  --font-sans:  'Atkinson Hyperlegible Next', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:  'Maple Mono NF', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --s1: 5px;
+  --s2: 10px;
+  --s3: 20px;
+  --s4: 40px;
+  --s5: 80px;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #14110D;
+    --bg-2:    #1F1A14;
+    --fg:      #E8E1D2;
+    --muted:   #8A8578;
+    --gold:    #C9BE9E;
+    --gold-hi: #F0E6C8;
+    --green:   #4F6B4F;
+    --hair:    rgba(232, 225, 210, 0.14);
+  }
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html { -webkit-text-size-adjust: 100%; }
+
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 10vw 2rem 8rem 10%;
 }
 
-main {
-  max-width: 640px;
-  width: 100%;
-}
+img, svg, picture { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
 
-/* Short, deliberate, left-anchored accent rule */
-.rule {
-  width: 2rem;
-  height: 2px;
-  background: var(--green);
-  margin-bottom: 1.75rem;
-}
+/* ─── Type scale ─────────────────────────────────────────────────── */
+h1, h2, .display { text-wrap: balance; }
 
-/* "← Home" style back link (muted, static underline, color fade) */
-.back-link {
-  display: inline-block;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(43, 36, 27, 0.30);
-  transition: color 400ms ease, text-decoration-color 400ms ease;
-  margin-bottom: 2rem;
-}
-
-.back-link:hover,
-.back-link:focus-visible {
-  color: var(--gold-hi);
-  text-decoration-color: var(--gold-hi);
-  outline: none;
-}
-
-.back-link:focus-visible {
-  outline: 2px solid var(--green);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-
-/* Gold uppercase nav-style links (landing + project links) */
-.links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-
-.links a {
-  color: var(--gold);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.9375rem;
-  letter-spacing: 0.04em;
-  text-transform: lowercase;
-  display: inline-block;
-  padding: 0.2rem 0;
-  background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
-  background-size: 0% 1.5px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition: background-size 400ms cubic-bezier(0.22, 1, 0.36, 1), color 400ms ease;
-}
-
-.links a + a { margin-top: 0.5rem; }
-
-.links a:hover,
-.links a:focus-visible {
-  color: var(--gold-hi);
-  background-size: 100% 1.5px;
-  outline: none;
-}
-
-.links a:focus-visible {
-  outline: 2px solid var(--green);
-  outline-offset: 3px;
-  border-radius: 1px;
-}
-
-/* Tagline: muted subhead under h1 */
-.tagline {
-  color: var(--muted);
-  font-size: 0.9375rem;
-  letter-spacing: 0.01em;
-  margin-bottom: 2.5rem;
-}
-
-/* h1 — used on every page */
 h1 {
   font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  margin-bottom: 0.6rem;
 }
 
-/* .display — opt-in serif heading (landing + post titles) */
 .display {
-  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
-/* Inline + block monospace — Maple Mono, globally applied */
-code, kbd, samp {
-  font-family: var(--font-mono);
-  font-size: 0.875em;
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-pre {
-  font-family: var(--font-mono);
+.lead {
+  font-size: 1.25rem;
+  line-height: 1.45;
+  font-weight: 400;
 }
 
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.875em;
+.tagline {
+  color: var(--muted);
+  font-size: 1rem;
 }
 
-/* Birch branch mark — landing page only, above h1 */
+p { max-width: 62ch; }
+
+/* Prose links: gold text, hairline underline that turns gold-hi on hover.
+   Text color never shifts to gold-hi (fails contrast on parchment). */
+a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hair);
+  transition: text-decoration-color 400ms var(--ease);
+}
+
+a:hover { text-decoration-color: var(--gold-hi); }
+
+a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Short, deliberate, left-anchored accent rule above every h1 */
+.rule {
+  width: 2rem;
+  height: 2px;
+  background: var(--green);
+  margin-bottom: var(--s3);
+}
+
+/* ─── Page chrome: rail + content column ─────────────────────────── */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 640px);
+  padding: var(--s4) var(--s3) var(--s5);
+  row-gap: var(--s4);
+}
+
+.rail { display: flex; flex-direction: column; gap: var(--s3); }
+
 .site-mark {
-  display: block;
-  width: 72px;
-  height: 72px;
-  margin-bottom: 1.5rem;
-  animation: mark-in 1.2s cubic-bezier(0.37, 0, 0.63, 1) both;
+  width: 32px;
+  height: 32px;
+  animation: mark-in 600ms var(--ease) both;
 }
 
 @keyframes mark-in {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .site-mark { animation: none; }
 }
 
-/* Page chrome — mark + back-link in one row */
-.page-chrome {
+.rail-nav ul {
   display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  margin-bottom: 1.75rem;
-  line-height: 1;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s3);
 }
-.page-chrome .header-mark {
+
+.rail-nav a {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  text-decoration: none;
   display: inline-block;
-  line-height: 0;
-  width: 28px;
-  height: 28px;
-}
-.page-chrome .header-mark img {
-  display: block;
-  width: 28px;
-  height: 28px;
+  padding: 0.2rem 0;
+  background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms var(--ease);
 }
 
-/* Inside page-chrome the back-link has no bottom margin (chrome handles spacing) */
-.page-chrome .back-link {
-  margin-bottom: 0;
+.rail-nav a:hover { background-size: 100% 1.5px; }
+
+.rail-nav a[aria-current="page"] {
+  color: var(--fg);
+  background-image: linear-gradient(var(--fg), var(--fg));
+  background-size: 100% 1.5px;
 }
 
-/* Site footer — minimal mono line, every page */
+.rail-nav .sep { display: none; }
+
+@media (min-width: 900px) {
+  .page {
+    grid-template-columns: 160px minmax(0, 640px);
+    column-gap: 60px;
+    padding: var(--s5) var(--s4) 120px 10%;
+    align-items: start;
+  }
+
+  .rail {
+    position: sticky;
+    top: var(--s5);
+  }
+
+  .site-mark { width: 44px; height: 44px; }
+
+  .rail-nav ul { flex-direction: column; gap: var(--s2); }
+
+  .rail-nav .sep {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--hair);
+    margin: var(--s2) 0;
+  }
+}
+
+/* Content column */
+main { min-width: 0; }
+
 .site-footer {
-  margin-top: 5rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-
-/* ─── Dark mode ─────────────────────────────────────────────────── */
-/* Near-monochrome. Accents desaturate to cream so links read by weight
-   and underline, not chroma. Avoids the mid-century black+yellow trap. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:        #14110D;
-    --fg:        #E8E1D2;
-    --muted:     #8A8578;
-    --green:     #4F6B4F;
-    --gold:      #C9BE9E;
-    --gold-hi:   #F0E6C8;
-    --slate:     #7A9AB4;
-    --clay:      #B05050;
-  }
-
-  .back-link {
-    text-decoration-color: rgba(232, 225, 210, 0.20);
-  }
+  margin-top: var(--s5);
 }

@@ -10,48 +10,94 @@
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="/assets/brand/export/apple-touch-icon.png">
   <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Julian Hicks">
   <meta property="og:description" content="Data scientist & compulsive tinkerer. Cities, models, and the occasional apocalypse.">
   <meta property="og:image" content="https://julian.levhicks.com/assets/brand/export/logo-512.png">
   <meta property="og:url" content="https://julian.levhicks.com/">
-
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    main { max-width: 380px; }
-    .links hr {
-      border: none;
-      border-top: 1px solid rgba(43, 36, 27, 0.10);
-      margin: 0.75rem 0;
-      width: 2rem;
-      align-self: flex-start;
+    .tagline { margin-top: 10px; }
+    .lead { margin-top: 20px; }
+
+    section { margin-top: 60px; }
+    section > .label { margin-bottom: 10px; }
+
+    .project-rows li {
+      border-top: 1px solid var(--hair);
+      padding: 15px 0;
     }
-    @media (prefers-color-scheme: dark) {
-      .links hr { border-top-color: rgba(232, 225, 210, 0.10); }
+    .project-rows li:last-child { border-bottom: 1px solid var(--hair); }
+
+    .project-rows a {
+      color: var(--fg);
+      font-weight: 700;
+      text-decoration: none;
+      background-image: linear-gradient(var(--gold-hi), var(--gold-hi));
+      background-size: 0% 1.5px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      transition: background-size 400ms var(--ease);
     }
+    .project-rows a:hover { background-size: 100% 1.5px; }
+
+    .project-rows p { color: var(--muted); font-size: 0.9375rem; }
+
+    .more { display: inline-block; margin-top: 15px; font-weight: 700; }
   </style>
 </head>
 <body>
-  <main>
-    <picture>
-      <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
-      <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" aria-hidden="true" width="72" height="72">
-    </picture>
-    <h1 class="display">Julian Hicks</h1>
-    <p class="tagline">Data scientist &amp; compulsive tinkerer. <br> Cities, models, and the occasional apocalypse.</p>
-    <div class="rule" role="presentation"></div>
-    <nav class="links" aria-label="Links">
-      <a href="/projects/">Projects</a>
-      <a href="/about/">about</a>
-      <hr role="separator">
-      <a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a>
-      <a href="https://github.com/jcashell1989">GitHub</a>
-      <a href="mailto:julian@levhicks.com">Email</a>
-    </nav>
-    <footer class="site-footer">
-      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
-    </footer>
-  </main>
+  <div class="page">
+    <header class="rail">
+      <picture>
+        <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="44" height="44">
+      </picture>
+      <nav class="rail-nav" aria-label="Site">
+        <ul>
+          <li><a href="/" aria-current="page">Home</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/about/">About</a></li>
+          <li class="sep" role="presentation"></li>
+          <li><a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a></li>
+          <li><a href="https://github.com/jcashell1989">GitHub</a></li>
+          <li><a href="mailto:julian@levhicks.com">Email</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="rule" role="presentation"></div>
+      <h1 class="display">Julian Hicks</h1>
+      <p class="tagline">Data scientist &amp; compulsive tinkerer. Cities, models, and the occasional apocalypse.</p>
+      <p class="lead">I build production ML systems, the measurement to know whether they work, and the agent tooling to build them faster.</p>
+
+      <section aria-labelledby="sel">
+        <h2 class="label" id="sel">Selected projects</h2>
+        <ul class="project-rows">
+          <li>
+            <a href="https://github.com/jcashell1989/asknum-eval">asknum-eval</a>
+            <p>Evals for ask-a-question, get-a-number systems.</p>
+          </li>
+          <li>
+            <a href="https://github.com/jcashell1989/corylus">Corylus</a>
+            <p>A review queue for judged agent work. The agents do the work; a human answers for it.</p>
+          </li>
+          <li>
+            <a href="https://github.com/jcashell1989/cleo-parchment">cleo-parchment</a>
+            <p>A warm terminal color scheme in light and dark. Same palette as this page.</p>
+          </li>
+        </ul>
+        <a class="more" href="/projects/">All projects &rarr;</a>
+      </section>
+
+      <section aria-labelledby="int">
+        <h2 class="label" id="int">Interests</h2>
+        <p>Urbanism, decarbonization, tabletop RPGs, watchmaking, geospatial everything.</p>
+      </section>
+
+      <footer class="site-footer label">&copy; Julian Hicks</footer>
+    </main>
+  </div>
 </body>
 </html>
