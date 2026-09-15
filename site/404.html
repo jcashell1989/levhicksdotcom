@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Not found — Julian Hicks</title>
+  <title>Not found · Julian Hicks</title>
   <meta name="description" content="That page doesn't exist.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
@@ -11,35 +11,45 @@
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="/assets/brand/export/apple-touch-icon.png">
   <meta name="theme-color" content="#F5F0E8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="stylesheet" href="/assets/css/base.css">
   <style>
-    main { max-width: 420px; }
-
-    .code {
-      color: var(--clay);
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      margin-bottom: 0.6rem;
-    }
+    .tagline { margin: 10px 0 20px; }
+    .code { margin-bottom: 40px; }
+    .links { display: flex; gap: 20px; }
+    .links a { font-weight: 700; }
   </style>
 </head>
 <body>
-  <main>
-    <nav class="page-chrome" aria-label="Page navigation">
-      <a href="/" class="header-mark" aria-label="home"><picture><source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo/logo-mark-black.svg" alt="" width="28" height="28"></picture></a>
-    </nav>
-    <div class="rule" role="presentation"></div>
-    <h1>Not here.</h1>
-    <p class="tagline">The page you wanted doesn't exist, or I moved it.</p>
-    <p class="code">404 · not found</p>
-    <nav class="links" aria-label="Back to site">
-      <a href="/">Home</a>
-      <a href="/projects/">Projects</a>
-    </nav>
-    <footer class="site-footer">
-      &copy; <script>document.write(new Date().getFullYear())</script> Julian Hicks
-    </footer>
-  </main>
+  <div class="page">
+    <header class="rail">
+      <picture>
+        <source srcset="/assets/brand/logo/logo-mark-white.svg" media="(prefers-color-scheme: dark)">
+        <img src="/assets/brand/logo/logo-mark-black.svg" class="site-mark" alt="" width="44" height="44">
+      </picture>
+      <nav class="rail-nav" aria-label="Site">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/about/">About</a></li>
+          <li class="sep" role="presentation"></li>
+          <li><a href="https://www.linkedin.com/in/julianchicks/">LinkedIn</a></li>
+          <li><a href="https://github.com/jcashell1989">GitHub</a></li>
+          <li><a href="mailto:julian@levhicks.com">Email</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="rule" role="presentation"></div>
+      <h1>Not here.</h1>
+      <p class="tagline">The page you wanted doesn't exist, or I moved it.</p>
+      <p class="code label">404 &middot; not found</p>
+      <nav class="links" aria-label="Back to site">
+        <a href="/">Home</a>
+        <a href="/projects/">Projects</a>
+      </nav>
+      <footer class="site-footer label">&copy; Julian Hicks</footer>
+    </main>
+  </div>
 </body>
 </html>

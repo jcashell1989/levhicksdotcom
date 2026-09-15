@@ -6,3 +6,9 @@
 /writing/*     /404.html  404
 https://levhicks.com/*      https://julian.levhicks.com/:splat  301!
 https://www.levhicks.com/*  https://julian.levhicks.com/:splat  301!
+
+# Speculative single-page layout: old section URLs land on their anchors.
+/projects/     /#projects     301!
+/projects      /#projects     301!
+/about/        /#about      301!
+/about         /#about      301!
