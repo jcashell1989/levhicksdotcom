@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Julian Hicks</title>
-  <meta name="description" content="Personal projects by Julian Hicks — things built, shipped, or started and occasionally finished.">
+  <meta name="description" content="Personal projects by Julian Hicks: numerical evals, human review of agent work, and a paused coding-agent dashboard prototype.">
   <link rel="icon" href="/assets/brand/logo/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/brand/export/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/assets/brand/export/favicon-16.png" sizes="16x16" type="image/png">
@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Projects — Julian Hicks">
-  <meta property="og:description" content="Personal projects by Julian Hicks — things built, shipped, or started and occasionally finished.">
+  <meta property="og:description" content="Personal projects by Julian Hicks: numerical evals, human review of agent work, and a paused coding-agent dashboard prototype.">
   <meta property="og:image" content="https://julian.levhicks.com/assets/brand/export/logo-512.png">
   <meta property="og:url" content="https://julian.levhicks.com/projects/">
   <link rel="stylesheet" href="/assets/css/base.css">
@@ -171,7 +171,7 @@
     </nav>
     <div class="rule" role="presentation"></div>
     <h1>Projects</h1>
-    <p class="tagline">Things I've built, shipped, or started and occasionally finished.</p>
+    <p class="tagline">Things I've built to check an answer, review work, or keep track of what the machines are doing.</p>
     <ul class="project-list">
       <li class="project">
         <div class="image-frame plate">
@@ -185,11 +185,16 @@
           <a href="https://github.com/jcashell1989/asknum-eval">github</a>
         </div>
         <p class="desc">
-          Evals for ask-a-question, get-a-number systems. A natural-language
-          question goes in, a number from a governed data source comes out —
-          this repo checks the number. Two tiers over one golden eval set: a
-          tool tier that grades the query engine, and an agent tier that grades
-          the full pipeline, including refusals, caveats, and relative dates.
+          I built evals for systems that answer questions with numbers. For a
+          month with no data, “revenue was $0” is a plausible wrong answer:
+          missing data isn't zero revenue. Tests that only check whether SQL
+          runs won't catch that distinction. This eval requires a null result
+          and rejects zero. The tool tier compares query results with expected
+          values; the agent tier checks the question-to-answer pipeline,
+          including refusals, caveats, and relative dates. The demo has 29
+          passes out of 30 in the tool tier, with one intentional skip for an
+          out-of-scope question that requires an agent to refuse. That is a
+          query-engine result, not end-to-end agent accuracy.
         </p>
         <p class="status">open source</p>
       </li>
@@ -206,11 +211,12 @@
           <a href="https://github.com/jcashell1989/corylus">github</a>
         </div>
         <p class="desc">
-          The control layer for an automated agentic work pipeline: fast,
-          reliable human judgment over everything the machines ship. Agents
-          pick up tickets and ship work on a schedule, a judge agent reviews
-          each attempt with a verdict and confidence score, and one screen puts
-          the queue in front of you to approve, send back, or discard.
+          I built a review interface for agent work. A ticket queue opens into
+          the original request, the agent's attempt, a judge agent's verdict
+          and confidence estimate, and a diff when the attempt includes git
+          pointers. I can inspect the changes and send an attempt back with a
+          revision note instead of approving it. The judge's confidence is an
+          estimate; the decision is still mine.
         </p>
         <p class="status">open source</p>
       </li>
@@ -228,13 +234,11 @@
           <a href="https://github.com/jcashell1989/flightdeck">github</a>
         </div>
         <p class="desc">
-          A mission-control dashboard for running multiple AI coding agents in
-          parallel across many repos — one glanceable view of every session on
-          your machine, grouped by project and agent, so nothing gets lost
-          between terminal tabs. Dispatches new work directly, and picks up
-          sessions started elsewhere without needing a wrapper.
+          A desktop dashboard prototype I built to keep track of AI coding
+          sessions across projects and see which ones need attention. I've
+          paused it until I find a gap in existing tools worth building for.
         </p>
-        <p class="status">unreleased, project still in development</p>
+        <p class="status">paused prototype</p>
       </li>
     </ul>
     <footer class="site-footer">
